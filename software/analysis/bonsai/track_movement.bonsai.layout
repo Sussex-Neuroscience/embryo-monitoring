@@ -17,9 +17,6 @@
     <VisualizerSettings>
       <FileCaptureVisualizer />
     </VisualizerSettings>
-    <Mashups>
-      <int>1</int>
-    </Mashups>
   </DialogSettings>
   <DialogSettings>
     <Visible>false</Visible>
@@ -36,11 +33,8 @@
     <VisualizerSettings>
       <IplImageVisualizer />
     </VisualizerSettings>
-    <Mashups>
-      <int>1</int>
-    </Mashups>
   </DialogSettings>
-  <DialogSettings>
+  <DialogSettings xsi:type="WorkflowEditorSettings">
     <Visible>false</Visible>
     <Location>
       <X>234</X>
@@ -55,6 +49,18 @@
     <VisualizerSettings>
       <ObjectTextVisualizer />
     </VisualizerSettings>
+    <EditorDialogSettings>
+      <Visible>false</Visible>
+      <Location>
+        <X>26</X>
+        <Y>26</Y>
+      </Location>
+      <Size>
+        <Width>975</Width>
+        <Height>1020</Height>
+      </Size>
+      <WindowState>Normal</WindowState>
+    </EditorDialogSettings>
   </DialogSettings>
   <DialogSettings xsi:type="WorkflowEditorSettings">
     <Visible>false</Visible>
