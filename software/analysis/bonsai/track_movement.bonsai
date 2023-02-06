@@ -11,8 +11,8 @@
     <Nodes>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:FileCapture">
-          <cv:FileName>C:\Users\Andre Maia Chagas\Desktop\22.03.02 (FS)\1242022-03-02T12_52_43.avi</cv:FileName>
-          <cv:PlaybackRate>10240</cv:PlaybackRate>
+          <cv:FileName>5_2023-01-27T18_53_50.avi</cv:FileName>
+          <cv:PlaybackRate>5242880</cv:PlaybackRate>
           <cv:StartPosition>0</cv:StartPosition>
           <cv:PositionUnits>Frames</cv:PositionUnits>
           <cv:Loop>false</cv:Loop>
@@ -39,16 +39,16 @@
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>153</cv:X>
+                        <cv:Y>228</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -61,7 +61,7 @@
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -75,7 +75,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -117,10 +117,10 @@
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>6</cv:X>
+                        <cv:Y>10</cv:Y>
+                        <cv:Width>21</cv:Width>
+                        <cv:Height>52</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -190,16 +190,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>209</cv:X>
+                        <cv:Y>222</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -212,7 +212,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -226,7 +226,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -268,10 +268,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>9</cv:Y>
+                        <cv:Width>18</cv:Width>
+                        <cv:Height>53</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -341,16 +341,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>269</cv:X>
+                        <cv:Y>210</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -363,7 +363,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -377,7 +377,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -419,10 +419,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>6</cv:X>
+                        <cv:Y>12</cv:Y>
+                        <cv:Width>21</cv:Width>
+                        <cv:Height>48</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -492,16 +492,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>149</cv:X>
+                        <cv:Y>303</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -514,7 +514,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -528,7 +528,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -570,10 +570,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>9</cv:Y>
+                        <cv:Width>20</cv:Width>
+                        <cv:Height>50</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -643,16 +643,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>216</cv:X>
+                        <cv:Y>304</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -665,7 +665,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -679,7 +679,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -721,10 +721,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>5</cv:X>
+                        <cv:Y>12</cv:Y>
+                        <cv:Width>24</cv:Width>
+                        <cv:Height>48</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -794,16 +794,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>278</cv:X>
+                        <cv:Y>295</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -816,7 +816,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -830,7 +830,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -872,10 +872,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>5</cv:X>
+                        <cv:Y>9</cv:Y>
+                        <cv:Width>19</cv:Width>
+                        <cv:Height>52</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -956,6 +956,13 @@ item4 as area
             <Edge From="7" To="8" Label="Source1" />
           </Edges>
         </Workflow>
+      </Expression>
+      <Expression xsi:type="io:CsvWriter">
+        <io:FileName>top_left-5_2023-01-27_run-.csv</io:FileName>
+        <io:Append>false</io:Append>
+        <io:Overwrite>false</io:Overwrite>
+        <io:Suffix>Timestamp</io:Suffix>
+        <io:IncludeHeader>true</io:IncludeHeader>
       </Expression>
       <Expression xsi:type="rx:SelectMany">
         <Name>Top Right</Name>
@@ -974,16 +981,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>492</cv:X>
+                        <cv:Y>169</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -996,7 +1003,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -1010,7 +1017,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1052,10 +1059,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>7</cv:Y>
+                        <cv:Width>18</cv:Width>
+                        <cv:Height>55</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -1125,16 +1132,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>553</cv:X>
+                        <cv:Y>187</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1147,7 +1154,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -1161,7 +1168,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1203,10 +1210,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>8</cv:Y>
+                        <cv:Width>18</cv:Width>
+                        <cv:Height>54</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -1276,16 +1283,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>616</cv:X>
+                        <cv:Y>168</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1298,7 +1305,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -1312,7 +1319,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1354,10 +1361,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>4</cv:X>
+                        <cv:Y>6</cv:Y>
+                        <cv:Width>23</cv:Width>
+                        <cv:Height>52</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -1427,16 +1434,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>482</cv:X>
+                        <cv:Y>268</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1449,7 +1456,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -1463,7 +1470,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1505,10 +1512,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>6</cv:X>
+                        <cv:Y>9</cv:Y>
+                        <cv:Width>20</cv:Width>
+                        <cv:Height>51</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -1578,16 +1585,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>550</cv:X>
+                        <cv:Y>285</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1600,7 +1607,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -1614,7 +1621,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1656,10 +1663,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>5</cv:X>
+                        <cv:Y>5</cv:Y>
+                        <cv:Width>18</cv:Width>
+                        <cv:Height>55</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -1729,16 +1736,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>606</cv:X>
+                        <cv:Y>279</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1751,7 +1758,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -1765,7 +1772,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1807,10 +1814,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>4</cv:X>
+                        <cv:Y>7</cv:Y>
+                        <cv:Width>19</cv:Width>
+                        <cv:Height>53</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -1891,6 +1898,13 @@ item4 as area
             <Edge From="7" To="8" Label="Source1" />
           </Edges>
         </Workflow>
+      </Expression>
+      <Expression xsi:type="io:CsvWriter">
+        <io:FileName>top_right-5_2023-01-27_run-.csv</io:FileName>
+        <io:Append>false</io:Append>
+        <io:Overwrite>false</io:Overwrite>
+        <io:Suffix>Timestamp</io:Suffix>
+        <io:IncludeHeader>true</io:IncludeHeader>
       </Expression>
       <Expression xsi:type="rx:SelectMany">
         <Name>Bottom Left</Name>
@@ -1909,16 +1923,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>168</cv:X>
+                        <cv:Y>565</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1931,7 +1945,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -1945,7 +1959,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1987,10 +2001,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>5</cv:X>
+                        <cv:Y>13</cv:Y>
+                        <cv:Width>19</cv:Width>
+                        <cv:Height>48</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -2060,16 +2074,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>226</cv:X>
+                        <cv:Y>552</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2082,7 +2096,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -2096,7 +2110,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2138,10 +2152,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>8</cv:X>
+                        <cv:Y>11</cv:Y>
+                        <cv:Width>17</cv:Width>
+                        <cv:Height>47</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -2211,16 +2225,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>270</cv:X>
+                        <cv:Y>522</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2233,7 +2247,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -2247,7 +2261,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2289,10 +2303,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>4</cv:X>
+                        <cv:Y>10</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>49</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -2362,16 +2376,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>194</cv:X>
+                        <cv:Y>656</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2384,7 +2398,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -2398,7 +2412,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2440,10 +2454,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>5</cv:X>
+                        <cv:Y>8</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>52</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -2513,16 +2527,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>240</cv:X>
+                        <cv:Y>662</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2535,7 +2549,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -2549,7 +2563,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2591,10 +2605,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>4</cv:X>
+                        <cv:Y>9</cv:Y>
+                        <cv:Width>23</cv:Width>
+                        <cv:Height>50</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -2664,16 +2678,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>279</cv:X>
+                        <cv:Y>654</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2686,7 +2700,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -2700,7 +2714,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2743,9 +2757,9 @@ item4 as area
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
                         <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:Y>7</cv:Y>
+                        <cv:Width>24</cv:Width>
+                        <cv:Height>50</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -2826,6 +2840,13 @@ item4 as area
             <Edge From="7" To="8" Label="Source1" />
           </Edges>
         </Workflow>
+      </Expression>
+      <Expression xsi:type="io:CsvWriter">
+        <io:FileName>bottom_left-5_2023-01-27_run-.csv</io:FileName>
+        <io:Append>false</io:Append>
+        <io:Overwrite>false</io:Overwrite>
+        <io:Suffix>Timestamp</io:Suffix>
+        <io:IncludeHeader>true</io:IncludeHeader>
       </Expression>
       <Expression xsi:type="rx:SelectMany">
         <Name>Bottom Right</Name>
@@ -2844,16 +2865,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>512</cv:X>
+                        <cv:Y>536</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2866,7 +2887,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -2880,7 +2901,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2922,10 +2943,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>6</cv:X>
+                        <cv:Y>10</cv:Y>
+                        <cv:Width>19</cv:Width>
+                        <cv:Height>50</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -2995,16 +3016,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>582</cv:X>
+                        <cv:Y>528</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3017,7 +3038,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -3031,7 +3052,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3073,10 +3094,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>10</cv:Y>
+                        <cv:Width>18</cv:Width>
+                        <cv:Height>51</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -3146,16 +3167,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>613</cv:X>
+                        <cv:Y>532</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3168,7 +3189,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -3182,7 +3203,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3225,9 +3246,9 @@ item4 as area
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
                         <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:Y>8</cv:Y>
+                        <cv:Width>19</cv:Width>
+                        <cv:Height>51</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -3297,16 +3318,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>515</cv:X>
+                        <cv:Y>620</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3319,7 +3340,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -3333,7 +3354,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3375,10 +3396,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>7</cv:Y>
+                        <cv:Width>18</cv:Width>
+                        <cv:Height>50</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -3448,16 +3469,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>573</cv:X>
+                        <cv:Y>614</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3470,7 +3491,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -3484,7 +3505,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3526,10 +3547,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>6</cv:X>
+                        <cv:Y>7</cv:Y>
+                        <cv:Width>18</cv:Width>
+                        <cv:Height>51</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -3599,16 +3620,16 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>143</cv:X>
-                        <cv:Y>132</cv:Y>
-                        <cv:Width>53</cv:Width>
-                        <cv:Height>92</cv:Height>
+                        <cv:X>629</cv:X>
+                        <cv:Y>616</cv:Y>
+                        <cv:Width>30</cv:Width>
+                        <cv:Height>70</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>75</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3621,7 +3642,7 @@ item4 as area
                         <cv:X>0</cv:X>
                         <cv:Y>0</cv:Y>
                       </cv:Offset>
-                      <cv:MinArea>200</cv:MinArea>
+                      <cv:MinArea>375</cv:MinArea>
                       <cv:MaxArea xsi:nil="true" />
                     </Combinator>
                   </Expression>
@@ -3635,7 +3656,7 @@ item4 as area
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>128</cv:ThresholdValue>
+                      <cv:ThresholdValue>0</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3677,10 +3698,10 @@ item4 as area
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>3</cv:X>
-                        <cv:Y>1</cv:Y>
-                        <cv:Width>13</cv:Width>
-                        <cv:Height>29</cv:Height>
+                        <cv:X>5</cv:X>
+                        <cv:Y>8</cv:Y>
+                        <cv:Width>17</cv:Width>
+                        <cv:Height>51</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -3762,38 +3783,51 @@ item4 as area
           </Edges>
         </Workflow>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Zip" />
+      <Expression xsi:type="io:CsvWriter">
+        <io:FileName>bottom_right-5_2023-01-27_run-.csv</io:FileName>
+        <io:Append>false</io:Append>
+        <io:Overwrite>false</io:Overwrite>
+        <io:Suffix>Timestamp</io:Suffix>
+        <io:IncludeHeader>true</io:IncludeHeader>
       </Expression>
-      <Expression xsi:type="scr:ExpressionTransform">
-        <scr:Expression>new(
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Zip" />
+        </Builder>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="scr:ExpressionTransform">
+          <scr:Expression>new(
 Item1 as TopLeft,
 Item2 as TopRight,
 Item3 as BottomLeft,
 item4 as BottomRight
 
 )</scr:Expression>
+        </Builder>
       </Expression>
-      <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Users\Andre Maia Chagas\Documents\GitHub\sussex\embryo-monitoring\data\output.csv</io:FileName>
-        <io:Append>false</io:Append>
-        <io:Overwrite>false</io:Overwrite>
-        <io:Suffix>Timestamp</io:Suffix>
-        <io:IncludeHeader>true</io:IncludeHeader>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="io:CsvWriter">
+          <io:FileName>output-5_2023-01-27_run-.csv</io:FileName>
+          <io:Append>false</io:Append>
+          <io:Overwrite>false</io:Overwrite>
+          <io:Suffix>Timestamp</io:Suffix>
+          <io:IncludeHeader>true</io:IncludeHeader>
+        </Builder>
       </Expression>
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
       <Edge From="1" To="2" Label="Source1" />
-      <Edge From="1" To="3" Label="Source1" />
       <Edge From="1" To="4" Label="Source1" />
-      <Edge From="1" To="5" Label="Source1" />
-      <Edge From="2" To="6" Label="Source1" />
-      <Edge From="3" To="6" Label="Source2" />
-      <Edge From="4" To="6" Label="Source3" />
-      <Edge From="5" To="6" Label="Source4" />
+      <Edge From="1" To="6" Label="Source1" />
+      <Edge From="1" To="8" Label="Source1" />
+      <Edge From="2" To="3" Label="Source1" />
+      <Edge From="4" To="5" Label="Source1" />
       <Edge From="6" To="7" Label="Source1" />
-      <Edge From="7" To="8" Label="Source1" />
+      <Edge From="8" To="9" Label="Source1" />
+      <Edge From="10" To="11" Label="Source1" />
+      <Edge From="11" To="12" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
