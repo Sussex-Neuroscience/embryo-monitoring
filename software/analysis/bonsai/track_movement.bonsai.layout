@@ -5,8 +5,8 @@
   <DialogSettings>
     <Visible>true</Visible>
     <Location>
-      <X>53</X>
-      <Y>332</Y>
+      <X>283</X>
+      <Y>616</Y>
     </Location>
     <Size>
       <Width>336</Width>
@@ -17,6 +17,34 @@
     <VisualizerSettings>
       <FileCaptureVisualizer />
     </VisualizerSettings>
+  </DialogSettings>
+  <DialogSettings>
+    <Visible>true</Visible>
+    <Location>
+      <X>680</X>
+      <Y>531</Y>
+    </Location>
+    <Size>
+      <Width>336</Width>
+      <Height>279</Height>
+    </Size>
+    <WindowState>Normal</WindowState>
+    <VisualizerTypeName>Bonsai.Vision.Design.IplImageVisualizer</VisualizerTypeName>
+    <VisualizerSettings>
+      <IplImageVisualizer />
+    </VisualizerSettings>
+  </DialogSettings>
+  <DialogSettings>
+    <Visible>false</Visible>
+    <Location>
+      <X>234</X>
+      <Y>234</Y>
+    </Location>
+    <Size>
+      <Width>416</Width>
+      <Height>279</Height>
+    </Size>
+    <WindowState>Normal</WindowState>
   </DialogSettings>
   <DialogSettings>
     <Visible>false</Visible>
@@ -44,12 +72,12 @@
     <EditorDialogSettings>
       <Visible>false</Visible>
       <Location>
-        <X>154</X>
-        <Y>115</Y>
+        <X>190</X>
+        <Y>436</Y>
       </Location>
       <Size>
-        <Width>1366</Width>
-        <Height>774</Height>
+        <Width>1473</Width>
+        <Height>768</Height>
       </Size>
       <WindowState>Normal</WindowState>
     </EditorDialogSettings>
@@ -125,5 +153,21 @@
       <Height>0</Height>
     </Size>
     <WindowState>Normal</WindowState>
+  </DialogSettings>
+  <DialogSettings>
+    <Visible>true</Visible>
+    <Location>
+      <X>1226</X>
+      <Y>80</Y>
+    </Location>
+    <Size>
+      <Width>347</Width>
+      <Height>451</Height>
+    </Size>
+    <WindowState>Normal</WindowState>
+    <VisualizerTypeName>Bonsai.Vision.Design.ScalarHistogramVisualizer</VisualizerTypeName>
+    <VisualizerSettings>
+      <ScalarHistogramVisualizer />
+    </VisualizerSettings>
   </DialogSettings>
 </VisualizerLayout>

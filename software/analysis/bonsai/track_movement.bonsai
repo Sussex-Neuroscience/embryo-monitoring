@@ -22,6 +22,14 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:Grayscale" />
       </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="IntProperty">
+          <Value>50</Value>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
       <Expression xsi:type="rx:SelectMany">
         <Name>Top Left</Name>
         <Workflow>
@@ -29,26 +37,40 @@
             <Expression xsi:type="WorkflowInput">
               <Name>Source1</Name>
             </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Item1</Selector>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Item2</Selector>
+            </Expression>
             <Expression xsi:type="GroupWorkflow">
               <Name>index1</Name>
               <Workflow>
                 <Nodes>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
                   <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>132</cv:X>
-                        <cv:Y>213</cv:Y>
-                        <cv:Width>67</cv:Width>
-                        <cv:Height>95</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -111,19 +133,13 @@
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>5</cv:X>
-                        <cv:Y>42</cv:Y>
-                        <cv:Width>39</cv:Width>
-                        <cv:Height>45</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -138,6 +154,12 @@
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -154,32 +176,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -188,21 +212,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>194</cv:X>
-                        <cv:Y>202</cv:Y>
-                        <cv:Width>56</cv:Width>
-                        <cv:Height>95</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -265,19 +297,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>30</cv:X>
-                        <cv:Y>41</cv:Y>
-                        <cv:Width>21</cv:Width>
-                        <cv:Height>51</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -292,6 +318,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -308,32 +340,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -342,21 +376,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>243</cv:X>
-                        <cv:Y>192</cv:Y>
-                        <cv:Width>81</cv:Width>
-                        <cv:Height>99</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -419,19 +461,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>28</cv:X>
-                        <cv:Y>25</cv:Y>
-                        <cv:Width>31</cv:Width>
-                        <cv:Height>45</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -446,6 +482,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -462,32 +504,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -496,21 +540,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>132</cv:X>
-                        <cv:Y>297</cv:Y>
-                        <cv:Width>67</cv:Width>
-                        <cv:Height>95</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -573,19 +625,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>26</cv:X>
-                        <cv:Y>17</cv:Y>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
                         <cv:Width>22</cv:Width>
-                        <cv:Height>47</cv:Height>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -600,6 +646,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -616,32 +668,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -650,21 +704,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>203</cv:X>
-                        <cv:Y>294</cv:Y>
-                        <cv:Width>59</cv:Width>
-                        <cv:Height>84</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -727,19 +789,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>13</cv:X>
+                        <cv:X>7</cv:X>
                         <cv:Y>27</cv:Y>
-                        <cv:Width>32</cv:Width>
-                        <cv:Height>27</cv:Height>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -754,6 +810,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -770,32 +832,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -804,21 +868,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>261</cv:X>
-                        <cv:Y>285</cv:Y>
-                        <cv:Width>58</cv:Width>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
                         <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -881,19 +953,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>23</cv:X>
-                        <cv:Y>10</cv:Y>
-                        <cv:Width>16</cv:Width>
-                        <cv:Height>48</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -908,6 +974,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -924,32 +996,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -959,19 +1033,27 @@ Item4 as area
             <Expression xsi:type="WorkflowOutput" />
           </Nodes>
           <Edges>
-            <Edge From="0" To="1" Label="Source2" />
+            <Edge From="0" To="1" Label="Source1" />
             <Edge From="0" To="2" Label="Source1" />
-            <Edge From="0" To="3" Label="Source1" />
-            <Edge From="0" To="4" Label="Source1" />
-            <Edge From="0" To="5" Label="Source1" />
-            <Edge From="0" To="6" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="1" To="4" Label="Source1" />
+            <Edge From="1" To="5" Label="Source1" />
+            <Edge From="1" To="6" Label="Source1" />
             <Edge From="1" To="7" Label="Source1" />
+            <Edge From="1" To="8" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="2" To="4" Label="Source2" />
+            <Edge From="2" To="5" Label="Source2" />
+            <Edge From="2" To="6" Label="Source2" />
             <Edge From="2" To="7" Label="Source2" />
-            <Edge From="3" To="7" Label="Source3" />
-            <Edge From="4" To="7" Label="Source4" />
-            <Edge From="5" To="7" Label="Source5" />
-            <Edge From="6" To="7" Label="Source6" />
-            <Edge From="7" To="8" Label="Source1" />
+            <Edge From="2" To="8" Label="Source2" />
+            <Edge From="3" To="9" Label="Source1" />
+            <Edge From="4" To="9" Label="Source2" />
+            <Edge From="5" To="9" Label="Source3" />
+            <Edge From="6" To="9" Label="Source4" />
+            <Edge From="7" To="9" Label="Source5" />
+            <Edge From="8" To="9" Label="Source6" />
+            <Edge From="9" To="10" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -982,26 +1064,40 @@ Item4 as area
             <Expression xsi:type="WorkflowInput">
               <Name>Source1</Name>
             </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Item1</Selector>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Item2</Selector>
+            </Expression>
             <Expression xsi:type="GroupWorkflow">
               <Name>index1</Name>
               <Workflow>
                 <Nodes>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
                   <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>132</cv:X>
-                        <cv:Y>213</cv:Y>
-                        <cv:Width>67</cv:Width>
-                        <cv:Height>95</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1064,19 +1160,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>5</cv:X>
-                        <cv:Y>42</cv:Y>
-                        <cv:Width>39</cv:Width>
-                        <cv:Height>45</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -1091,6 +1181,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -1107,32 +1203,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -1141,21 +1239,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>194</cv:X>
-                        <cv:Y>202</cv:Y>
-                        <cv:Width>56</cv:Width>
-                        <cv:Height>95</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1218,19 +1324,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>30</cv:X>
-                        <cv:Y>41</cv:Y>
-                        <cv:Width>21</cv:Width>
-                        <cv:Height>51</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -1245,6 +1345,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -1261,32 +1367,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -1295,21 +1403,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>243</cv:X>
-                        <cv:Y>192</cv:Y>
-                        <cv:Width>81</cv:Width>
-                        <cv:Height>99</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1372,19 +1488,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>28</cv:X>
-                        <cv:Y>25</cv:Y>
-                        <cv:Width>31</cv:Width>
-                        <cv:Height>45</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -1399,6 +1509,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -1415,32 +1531,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -1449,21 +1567,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>132</cv:X>
-                        <cv:Y>297</cv:Y>
-                        <cv:Width>67</cv:Width>
-                        <cv:Height>95</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1526,19 +1652,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>26</cv:X>
-                        <cv:Y>17</cv:Y>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
                         <cv:Width>22</cv:Width>
-                        <cv:Height>47</cv:Height>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -1553,6 +1673,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -1569,32 +1695,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -1603,21 +1731,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>203</cv:X>
-                        <cv:Y>294</cv:Y>
-                        <cv:Width>59</cv:Width>
-                        <cv:Height>84</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1680,19 +1816,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>13</cv:X>
+                        <cv:X>7</cv:X>
                         <cv:Y>27</cv:Y>
-                        <cv:Width>32</cv:Width>
-                        <cv:Height>27</cv:Height>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -1707,6 +1837,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -1723,32 +1859,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -1757,21 +1895,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>261</cv:X>
-                        <cv:Y>285</cv:Y>
-                        <cv:Width>58</cv:Width>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
                         <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -1834,19 +1980,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>23</cv:X>
-                        <cv:Y>10</cv:Y>
-                        <cv:Width>16</cv:Width>
-                        <cv:Height>48</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -1861,6 +2001,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -1877,32 +2023,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -1912,19 +2060,27 @@ Item4 as area
             <Expression xsi:type="WorkflowOutput" />
           </Nodes>
           <Edges>
-            <Edge From="0" To="1" Label="Source2" />
+            <Edge From="0" To="1" Label="Source1" />
             <Edge From="0" To="2" Label="Source1" />
-            <Edge From="0" To="3" Label="Source1" />
-            <Edge From="0" To="4" Label="Source1" />
-            <Edge From="0" To="5" Label="Source1" />
-            <Edge From="0" To="6" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="1" To="4" Label="Source1" />
+            <Edge From="1" To="5" Label="Source1" />
+            <Edge From="1" To="6" Label="Source1" />
             <Edge From="1" To="7" Label="Source1" />
+            <Edge From="1" To="8" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="2" To="4" Label="Source2" />
+            <Edge From="2" To="5" Label="Source2" />
+            <Edge From="2" To="6" Label="Source2" />
             <Edge From="2" To="7" Label="Source2" />
-            <Edge From="3" To="7" Label="Source3" />
-            <Edge From="4" To="7" Label="Source4" />
-            <Edge From="5" To="7" Label="Source5" />
-            <Edge From="6" To="7" Label="Source6" />
-            <Edge From="7" To="8" Label="Source1" />
+            <Edge From="2" To="8" Label="Source2" />
+            <Edge From="3" To="9" Label="Source1" />
+            <Edge From="4" To="9" Label="Source2" />
+            <Edge From="5" To="9" Label="Source3" />
+            <Edge From="6" To="9" Label="Source4" />
+            <Edge From="7" To="9" Label="Source5" />
+            <Edge From="8" To="9" Label="Source6" />
+            <Edge From="9" To="10" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -1935,26 +2091,40 @@ Item4 as area
             <Expression xsi:type="WorkflowInput">
               <Name>Source1</Name>
             </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Item1</Selector>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Item2</Selector>
+            </Expression>
             <Expression xsi:type="GroupWorkflow">
               <Name>index1</Name>
               <Workflow>
                 <Nodes>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
                   <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>132</cv:X>
-                        <cv:Y>213</cv:Y>
-                        <cv:Width>67</cv:Width>
-                        <cv:Height>95</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2017,19 +2187,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>5</cv:X>
-                        <cv:Y>42</cv:Y>
-                        <cv:Width>39</cv:Width>
-                        <cv:Height>45</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -2044,6 +2208,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -2060,32 +2230,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -2094,21 +2266,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>194</cv:X>
-                        <cv:Y>202</cv:Y>
-                        <cv:Width>56</cv:Width>
-                        <cv:Height>95</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2171,19 +2351,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>30</cv:X>
-                        <cv:Y>41</cv:Y>
-                        <cv:Width>21</cv:Width>
-                        <cv:Height>51</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -2198,6 +2372,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -2214,32 +2394,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -2248,21 +2430,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>243</cv:X>
-                        <cv:Y>192</cv:Y>
-                        <cv:Width>81</cv:Width>
-                        <cv:Height>99</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2325,19 +2515,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>28</cv:X>
-                        <cv:Y>25</cv:Y>
-                        <cv:Width>31</cv:Width>
-                        <cv:Height>45</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -2352,6 +2536,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -2368,32 +2558,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -2402,21 +2594,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>132</cv:X>
-                        <cv:Y>297</cv:Y>
-                        <cv:Width>67</cv:Width>
-                        <cv:Height>95</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2479,19 +2679,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>26</cv:X>
-                        <cv:Y>17</cv:Y>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
                         <cv:Width>22</cv:Width>
-                        <cv:Height>47</cv:Height>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -2506,6 +2700,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -2522,32 +2722,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -2556,21 +2758,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>203</cv:X>
-                        <cv:Y>294</cv:Y>
-                        <cv:Width>59</cv:Width>
-                        <cv:Height>84</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2633,19 +2843,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>13</cv:X>
+                        <cv:X>7</cv:X>
                         <cv:Y>27</cv:Y>
-                        <cv:Width>32</cv:Width>
-                        <cv:Height>27</cv:Height>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -2660,6 +2864,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -2676,32 +2886,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -2710,21 +2922,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>261</cv:X>
-                        <cv:Y>285</cv:Y>
-                        <cv:Width>58</cv:Width>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
                         <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2787,19 +3007,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>23</cv:X>
-                        <cv:Y>10</cv:Y>
-                        <cv:Width>16</cv:Width>
-                        <cv:Height>48</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -2814,6 +3028,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -2830,32 +3050,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -2865,19 +3087,27 @@ Item4 as area
             <Expression xsi:type="WorkflowOutput" />
           </Nodes>
           <Edges>
-            <Edge From="0" To="1" Label="Source2" />
+            <Edge From="0" To="1" Label="Source1" />
             <Edge From="0" To="2" Label="Source1" />
-            <Edge From="0" To="3" Label="Source1" />
-            <Edge From="0" To="4" Label="Source1" />
-            <Edge From="0" To="5" Label="Source1" />
-            <Edge From="0" To="6" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="1" To="4" Label="Source1" />
+            <Edge From="1" To="5" Label="Source1" />
+            <Edge From="1" To="6" Label="Source1" />
             <Edge From="1" To="7" Label="Source1" />
+            <Edge From="1" To="8" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="2" To="4" Label="Source2" />
+            <Edge From="2" To="5" Label="Source2" />
+            <Edge From="2" To="6" Label="Source2" />
             <Edge From="2" To="7" Label="Source2" />
-            <Edge From="3" To="7" Label="Source3" />
-            <Edge From="4" To="7" Label="Source4" />
-            <Edge From="5" To="7" Label="Source5" />
-            <Edge From="6" To="7" Label="Source6" />
-            <Edge From="7" To="8" Label="Source1" />
+            <Edge From="2" To="8" Label="Source2" />
+            <Edge From="3" To="9" Label="Source1" />
+            <Edge From="4" To="9" Label="Source2" />
+            <Edge From="5" To="9" Label="Source3" />
+            <Edge From="6" To="9" Label="Source4" />
+            <Edge From="7" To="9" Label="Source5" />
+            <Edge From="8" To="9" Label="Source6" />
+            <Edge From="9" To="10" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -2888,26 +3118,40 @@ Item4 as area
             <Expression xsi:type="WorkflowInput">
               <Name>Source1</Name>
             </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Item1</Selector>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Item2</Selector>
+            </Expression>
             <Expression xsi:type="GroupWorkflow">
               <Name>index1</Name>
               <Workflow>
                 <Nodes>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
                   <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>132</cv:X>
-                        <cv:Y>213</cv:Y>
-                        <cv:Width>67</cv:Width>
-                        <cv:Height>95</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -2970,19 +3214,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>5</cv:X>
-                        <cv:Y>42</cv:Y>
-                        <cv:Width>39</cv:Width>
-                        <cv:Height>45</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -2997,6 +3235,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -3013,32 +3257,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -3047,21 +3293,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>194</cv:X>
-                        <cv:Y>202</cv:Y>
-                        <cv:Width>56</cv:Width>
-                        <cv:Height>95</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3124,19 +3378,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>30</cv:X>
-                        <cv:Y>41</cv:Y>
-                        <cv:Width>21</cv:Width>
-                        <cv:Height>51</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -3151,6 +3399,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -3167,32 +3421,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -3201,21 +3457,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>243</cv:X>
-                        <cv:Y>192</cv:Y>
-                        <cv:Width>81</cv:Width>
-                        <cv:Height>99</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3278,19 +3542,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>28</cv:X>
-                        <cv:Y>25</cv:Y>
-                        <cv:Width>31</cv:Width>
-                        <cv:Height>45</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -3305,6 +3563,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -3321,32 +3585,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -3355,21 +3621,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>132</cv:X>
-                        <cv:Y>297</cv:Y>
-                        <cv:Width>67</cv:Width>
-                        <cv:Height>95</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3432,19 +3706,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>26</cv:X>
-                        <cv:Y>17</cv:Y>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
                         <cv:Width>22</cv:Width>
-                        <cv:Height>47</cv:Height>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -3459,6 +3727,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -3475,32 +3749,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -3509,21 +3785,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>203</cv:X>
-                        <cv:Y>294</cv:Y>
-                        <cv:Width>59</cv:Width>
-                        <cv:Height>84</cv:Height>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
+                        <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3586,19 +3870,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>13</cv:X>
+                        <cv:X>7</cv:X>
                         <cv:Y>27</cv:Y>
-                        <cv:Width>32</cv:Width>
-                        <cv:Height>27</cv:Height>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -3613,6 +3891,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -3629,32 +3913,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -3663,21 +3949,29 @@ Item4 as area
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
+                    <Name>Source2</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="ThresholdValue" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>261</cv:X>
-                        <cv:Y>285</cv:Y>
-                        <cv:Width>58</cv:Width>
+                        <cv:X>150</cv:X>
+                        <cv:Y>208</cv:Y>
+                        <cv:Width>32</cv:Width>
                         <cv:Height>91</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Threshold">
-                      <cv:ThresholdValue>75</cv:ThresholdValue>
+                      <cv:ThresholdValue>50</cv:ThresholdValue>
                       <cv:MaxValue>255</cv:MaxValue>
                       <cv:ThresholdType>Binary</cv:ThresholdType>
                     </Combinator>
@@ -3740,19 +4034,13 @@ Item4 as area
                       <Property Name="RegionOfInterest" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Area</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:LastOrDefault" />
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:Crop">
                       <cv:RegionOfInterest>
-                        <cv:X>23</cv:X>
-                        <cv:Y>10</cv:Y>
-                        <cv:Width>16</cv:Width>
-                        <cv:Height>48</cv:Height>
+                        <cv:X>7</cv:X>
+                        <cv:Y>27</cv:Y>
+                        <cv:Width>22</cv:Width>
+                        <cv:Height>57</cv:Height>
                       </cv:RegionOfInterest>
                     </Combinator>
                   </Expression>
@@ -3767,6 +4055,12 @@ Item4 as area
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Width</Selector>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Area</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:LastOrDefault" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -3783,32 +4077,34 @@ Item4 as area
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="6" Label="Source1" />
-                  <Edge From="1" To="15" Label="Source2" />
+                  <Edge From="1" To="4" Label="Source2" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="3" To="8" Label="Source1" />
+                  <Edge From="3" To="15" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="10" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source1" />
                   <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="10" To="13" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="15" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source2" />
+                  <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="12" To="20" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="20" Label="Source4" />
+                  <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
                   <Edge From="15" To="18" Label="Source1" />
                   <Edge From="15" To="19" Label="Source1" />
                   <Edge From="16" To="17" Label="Source1" />
-                  <Edge From="17" To="20" Label="Source3" />
-                  <Edge From="18" To="20" Label="Source2" />
-                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="17" To="22" Label="Source3" />
+                  <Edge From="18" To="22" Label="Source2" />
+                  <Edge From="19" To="22" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source4" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -3818,19 +4114,27 @@ Item4 as area
             <Expression xsi:type="WorkflowOutput" />
           </Nodes>
           <Edges>
-            <Edge From="0" To="1" Label="Source2" />
+            <Edge From="0" To="1" Label="Source1" />
             <Edge From="0" To="2" Label="Source1" />
-            <Edge From="0" To="3" Label="Source1" />
-            <Edge From="0" To="4" Label="Source1" />
-            <Edge From="0" To="5" Label="Source1" />
-            <Edge From="0" To="6" Label="Source1" />
+            <Edge From="1" To="3" Label="Source1" />
+            <Edge From="1" To="4" Label="Source1" />
+            <Edge From="1" To="5" Label="Source1" />
+            <Edge From="1" To="6" Label="Source1" />
             <Edge From="1" To="7" Label="Source1" />
+            <Edge From="1" To="8" Label="Source1" />
+            <Edge From="2" To="3" Label="Source2" />
+            <Edge From="2" To="4" Label="Source2" />
+            <Edge From="2" To="5" Label="Source2" />
+            <Edge From="2" To="6" Label="Source2" />
             <Edge From="2" To="7" Label="Source2" />
-            <Edge From="3" To="7" Label="Source3" />
-            <Edge From="4" To="7" Label="Source4" />
-            <Edge From="5" To="7" Label="Source5" />
-            <Edge From="6" To="7" Label="Source6" />
-            <Edge From="7" To="8" Label="Source1" />
+            <Edge From="2" To="8" Label="Source2" />
+            <Edge From="3" To="9" Label="Source1" />
+            <Edge From="4" To="9" Label="Source2" />
+            <Edge From="5" To="9" Label="Source3" />
+            <Edge From="6" To="9" Label="Source4" />
+            <Edge From="7" To="9" Label="Source5" />
+            <Edge From="8" To="9" Label="Source6" />
+            <Edge From="9" To="10" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -3853,19 +4157,25 @@ item4 as BottomRight
         <io:Suffix>Timestamp</io:Suffix>
         <io:IncludeHeader>true</io:IncludeHeader>
       </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:ImageHistogram" />
+      </Expression>
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
-      <Edge From="1" To="2" Label="Source1" />
       <Edge From="1" To="3" Label="Source1" />
-      <Edge From="1" To="4" Label="Source1" />
-      <Edge From="1" To="5" Label="Source1" />
-      <Edge From="2" To="6" Label="Source1" />
-      <Edge From="3" To="6" Label="Source2" />
-      <Edge From="4" To="6" Label="Source3" />
-      <Edge From="5" To="6" Label="Source4" />
-      <Edge From="6" To="7" Label="Source1" />
-      <Edge From="7" To="8" Label="Source1" />
+      <Edge From="1" To="11" Label="Source1" />
+      <Edge From="2" To="3" Label="Source2" />
+      <Edge From="3" To="4" Label="Source1" />
+      <Edge From="3" To="5" Label="Source1" />
+      <Edge From="3" To="6" Label="Source1" />
+      <Edge From="3" To="7" Label="Source1" />
+      <Edge From="4" To="8" Label="Source1" />
+      <Edge From="5" To="8" Label="Source2" />
+      <Edge From="6" To="8" Label="Source3" />
+      <Edge From="7" To="8" Label="Source4" />
+      <Edge From="8" To="9" Label="Source1" />
+      <Edge From="9" To="10" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
