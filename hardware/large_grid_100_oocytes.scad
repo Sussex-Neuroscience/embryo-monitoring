@@ -3,8 +3,8 @@
 //designed by AM Chagas 20181001 CC BY 4.0 license
 //inspired on the design from J Menzies.
 
-wellx = 0.92;//0.3
-welly = 0.92;//0.7
+wellx = 0.6;//0.3
+welly = 1.4;//0.7
 wellz = 0.2;
 
 interwell = 0.4;
@@ -12,19 +12,12 @@ interwell = 0.4;
 nwellsx = 10;
 nwellsy = 10;
 
-platey = wellx*nwellsx*5+8;//10
-
-platex = welly*nwellsy*1.5+12;//14  
+platey = wellx*nwellsx*5+10;
+platex = welly*nwellsy*1.5+14;
 platez = 3.2        ;
 
-//nwellsx = 10;
-//nwellsy = 20;
 
-landmarks = 1;
-
-echo(platey);
-echo(platex);
-echo(platez);
+landmarks = 0;
 
 
 tol = 0.1;
@@ -41,8 +34,8 @@ module grid(){
 }//end module
 */
 module grid(wellx=wellx,welly=welly,holeThrough=0){
-    for (x = [-nwellsx/2+0.5:nwellsx/2-0.5]){
-        for (y = [-nwellsy/2+0.5:nwellsy/2-0.5]){
+    for (x = [-nwellsx/2:nwellsx/2]){
+        for (y = [-nwellsy/2:nwellsy/2]){
             translate([x*(wellx+interwell),y*(welly+interwell),platez/2-wellz/2+0.01]){
                 if(holeThrough==1){
                     cube([wellx,welly,wellz+10],center=true);
