@@ -5,7 +5,7 @@
 
 wellx = 0.92;//0.3
 welly = 0.92;//0.7
-wellz = 0.2;
+wellz = 0.22;
 
 interwell = 0.4;
 
