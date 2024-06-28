@@ -54,32 +54,22 @@ cap = sf.start_camera(videoInput=video_input)
 frame_width = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
 frame_height = int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
 fps = int(cap.get(cv.CAP_PROP_FPS))
+num_frames = int(cap.get(cv.CAP_PROP_FRAME_COUNT))
+
 if record_video:
     videoFileObject = sf.record_video(cap, recordFile, frame_width, frame_height, fps)
 
 threshold = 75
 #grab one frame:
 valid,gray = cap.read()
-#gray,_,_=cv.split(gray)
 
 if manual_crop:
     crop_map = cv.selectROI('frame', gray)
     crop_image = gray[crop_map[1]:crop_map[1]+crop_map[3],
                       crop_map[0]:crop_map[0]+crop_map[2],0]
-    
-#     gray = gray[crop_map[0]:crop_map[0]+crop_map[2],
-#                 crop_map[1]:crop_map[1]+crop_map[3]]
-
 
 ret,binary = cv.threshold(crop_image,threshold,255,cv.THRESH_BINARY)
-
-#binary1=copy.deepcopy(binary)
-
-#crop_img = img[y:y+h, x:x+w]
-#run a loop to catch each area and sum the pixel values on that area of the frame
-
-
-    
+  
 contours, hierarchy = cv.findContours(binary, cv.RETR_TREE,
                                       cv.CHAIN_APPROX_NONE) #detecting contours
 
@@ -88,18 +78,33 @@ contour_areas = list()
 contour_index = list()
 bounding_rectangles = list()
 #centroids = list()
+
 min_area = 200
+border_size = 15
+
+w_max=20+2*border_size
+h_max=50+2*border_size
 
 for index,item in enumerate(contours):
     area = cv.contourArea(item)
 
     #print(area)
     if area>min_area:
+        #temp_left=
+        
         
         contour_areas.append(area)
         contour_index.append(index)
+        
         x,y,w,h = cv.boundingRect(item)
-        bounding_rectangles.append([x,y,w,h])
+        #print(x,y,w,h)
+        #ws.append(w)
+        #hs.append(h)
+        
+        bounding_rectangles.append([x-border_size,
+                                    y-border_size,
+                                    w_max,
+                                    h_max])
         
         #moment = cv.moments(item)
         #centroidx = moment['m10']/moment['m00']
@@ -118,17 +123,17 @@ for index,item in enumerate(contours):
 
 #all that data needs to go to a csv file with time stamps.
 drawing = np.ones(binary.shape, np.uint8)
-test=cv.drawContours(drawing, contours, -1, (255,0,0), 2)
+test=cv.drawContours(drawing, contours, -1, 255, 2)
 
 #cap.read()
 
 #create two windows to show the animal movement while in maze:
 cv.namedWindow('original image', cv.WINDOW_NORMAL)
 cv.namedWindow('binary maze plus ROIs', cv.WINDOW_NORMAL)
-cv.namedWindow('contours', cv.WINDOW_NORMAL)
+#cv.namedWindow('contours', cv.WINDOW_NORMAL)
 
 
-cv.imshow('contours',test)
+#cv.imshow('contours',test)
 cv.imshow('original image',crop_image)
 cv.imshow('binary maze plus ROIs',binary)
 cv.waitKey(1)
@@ -137,32 +142,48 @@ cv.waitKey(1)
 absolute_time_start = sf.time_in_millis()
 video_ongoing=True
 
+roi_raw_data = np.zeros([len(contour_areas),
+                        h_max,
+                        w_max,
+                        num_frames],dtype="int8")
 
-while video_ongoing:
+#roi_areas = pd.DataFrame(data=np.zeros([num_frames,len(contour_areas)]),
+#                    columns=range(1,len(contour_areas)+1))
+
+#roi_raw_data = pd.DataFrame(data=np.zeros([num_frames,len(contour_areas)]),
+#                   columns=range(1,len(contour_areas)+1))
+
+
+for frame in range(num_frames):
     valid,gray = cap.read()
+    if not valid:
+        print("Can't receive frame (stream end?). Exiting ...")
+        break
+    
     crop_image = gray[crop_map[1]:crop_map[1]+crop_map[3],
                       crop_map[0]:crop_map[0]+crop_map[2],0]
-    ret,binary = cv.threshold(crop_image,threshold,255,cv.THRESH_BINARY)
+    #ret,binary = cv.threshold(crop_image,threshold,255,cv.THRESH_BINARY)
     #contours, hierarchy = cv.findContours(binary, cv.RETR_TREE,
     #                                  cv.CHAIN_APPROX_NONE) #detecting contours
     #cv.drawContours(drawing, contours, -1, (255,0,0), 1)
     #cv.drawContours(drawing, contours, -1, (255,0,0), 1)
-    for item in bounding_rectangles:
+    for index,item in enumerate(bounding_rectangles):
         x = item[0]
         y = item[1]
         w = item[2]
         h = item[3]
-        cv.rectangle(binary,(x-10,y-10),(x+10+w,y+10+h),255,2)
-    cv.imshow('contours',drawing)
+        cv.rectangle(binary,(x,y),(x+w,y+h),255,2)
+        one_roi = crop_image[y:y+h,x:x+w]
+        roi_raw_data[index,:,:,frame]=one_roi
+    #cv.imshow('contours',drawing)
     #cv.imshow('original image',crop_image)
-    cv.imshow('binary maze plus ROIs',binary)
+    #cv.imshow('binary maze plus ROIs',one_roi)
     
     
-    cv.waitKey(1)
+for index in range(roi_raw_data.shape[0]):
+    filename = "ROI{0}".format(index)
+    np.save(file=filename, arr=roi_raw_data[index])
 
-    if not valid:
-        print("Can't receive frame (stream end?). Exiting ...")
-        break
 
 # 
 # cv.namedWindow('gray1', cv.WINDOW_NORMAL)
