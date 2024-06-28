@@ -4,6 +4,7 @@ import numpy as np
 import cv2 as cv
 import supfun as sf
 from tqdm import tqdm
+from tqdm import trange
 import copy
 
 
@@ -25,7 +26,7 @@ num_frames = int(cap.get(cv.CAP_PROP_FRAME_COUNT))
 #threshold = 30
 #grab one frame:
 valid,gray = cap.read()
-
+cv.namedWindow("frame", cv.WINDOW_NORMAL)
 
 crop_map = cv.selectROI('frame', gray)
 crop_image = gray[crop_map[1]:crop_map[1]+crop_map[3],
@@ -96,8 +97,8 @@ for index,item in enumerate(contours):
         #added = False
         while True:
             cv.drawContours(temp_image, item, -1, 255, 1)
-            cv.rectangle(temp_image,(x,y),
-                                    (w,h),255,2)
+            cv.rectangle(temp_image,(x-border_size,y-border_size),
+                                    (x+w+border_size,y+h+border_size),255,2)
             cv.imshow('ROI candidate',temp_image)
             k = cv.waitKey(33)
             #print(k)
@@ -116,10 +117,10 @@ for index,item in enumerate(contours):
 cv.destroyWindow("ROI candidate")
 
 index=1
-for item in tqdm(bounding_rectangles): 
+for index in tqdm(trange(len(bounding_rectangles)),position=0): 
     roi_raw_data = np.zeros([h_max,w_max,num_frames],dtype="int8")
     
-    for frame in range(num_frames):
+    for frame in tqdm(trange(num_frames),total=num_frames,position=1,leave=False):
         valid,gray = cap.read()
         cv.waitKey(1)
         if not valid:
@@ -131,10 +132,10 @@ for item in tqdm(bounding_rectangles):
 
        
 #         
-        x = item[0]
-        y = item[1]
-        w = item[2]
-        h = item[3]
+        x = bounding_rectangles[index][0]
+        y = bounding_rectangles[index][1]
+        w = bounding_rectangles[index][2]
+        h = bounding_rectangles[index][3]
 #         cv.rectangle(binary,(x,y),(x+w,y+h),255,2)
         one_roi = crop_image[y:y+h,x:x+w]
         roi_raw_data[:,:,frame]=one_roi
@@ -142,7 +143,7 @@ for item in tqdm(bounding_rectangles):
     print("saving ROI: ",index)
     filename = "./data/ROI{0}.npy".format(index)
     np.save(file=filename, arr=roi_raw_data[index])
-    index=index+1
+    #index=index+1
 # #     #cv.imshow('contours',drawing)
 # #     #cv.imshow('original image',crop_image)
 # #     #cv.imshow('binary maze plus ROIs',one_roi)
