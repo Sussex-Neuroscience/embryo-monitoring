@@ -2,53 +2,16 @@
 #import all needed libraries
 import numpy as np
 import cv2 as cv
-import pandas as pd
 import supfun as sf
-import time
-#import serial
-import os
-import pandas as pd
-#from tkinter import filedialog as fd
-#from tkinter import *
-import csv
+from tqdm import tqdm
 import copy
 
-#for code inspection and testing of the code purposes we add a small pause in between frames in
-#the main code loop... this variable just below this needs to be set to False if one is running the actual experiments
-pause_between_frames = True
-
-#manual crop borders if needed:
-manual_crop = True
-
-#if running experiments "testing" should be False (related to testing the code)
-testing = True
-
-#If ROIs need to be drawn by experiementer, set the next variable to TRUE
-draw_rois = False
-
-#If just testing and no video needs to be recorded, set the next variable to FALSE
-record_video = False
-
-#define where the video is coming from. Use 0 for the first camera on the computer,
-#or a complete file path to use a pre-recorded video
-#video_input = '/home/andre/Dropbox/trabalho/converted.mp4'
-video_input = '/home/andre/Dropbox/trabalho/c.avi'
-
-#get the current date and time, so all files created do not overwrite existing data
-date_time = sf.get_current_time_formatted()
-
-if testing:
-    new_dir_path = '/home/andre/Desktop/maze_recordings/'
-    #new_dir_path = "C:/Users/labadmin/Desktop/maze_recordings/"
-    
-    
-    #recordFile = os.path.join(new_dir_path, f"test_{date_time}.mp4")
-    #load the trials file (description of each trial)
-    
-else:
-    pass
 
 
+
+
+#video_input="/home/andre/Dropbox/trabalho/c.avi"
+video_input="/home/andre/Desktop/M-Mov0007.avi"
 cap = sf.start_camera(videoInput=video_input)
 
 frame_width = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
@@ -56,22 +19,52 @@ frame_height = int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
 fps = int(cap.get(cv.CAP_PROP_FPS))
 num_frames = int(cap.get(cv.CAP_PROP_FRAME_COUNT))
 
-if record_video:
-    videoFileObject = sf.record_video(cap, recordFile, frame_width, frame_height, fps)
 
-threshold = 75
+
+    
+#threshold = 30
 #grab one frame:
 valid,gray = cap.read()
 
-if manual_crop:
-    crop_map = cv.selectROI('frame', gray)
-    crop_image = gray[crop_map[1]:crop_map[1]+crop_map[3],
-                      crop_map[0]:crop_map[0]+crop_map[2],0]
 
-ret,binary = cv.threshold(crop_image,threshold,255,cv.THRESH_BINARY)
+crop_map = cv.selectROI('frame', gray)
+crop_image = gray[crop_map[1]:crop_map[1]+crop_map[3],
+                 crop_map[0]:crop_map[0]+crop_map[2],0]
+cv.destroyWindow("frame")
+
+
+
+threshold_slider_max = 255
+#title_window = 'Linear Blend'
+
+def nothing(x):
+    pass
+
+#cv.namedWindow("raw_data")
+#cv.namedWindow("image")
+cv.namedWindow("test")
+#cv.imshow("raw_data",crop_image)
+
+cv.createTrackbar("threshold", 'test' , 70, threshold_slider_max, nothing)
+print("press 'enter' after you decided on the threshold level")
+while(1):
+    
+    threshold = cv.getTrackbarPos('threshold','test')
+    ret,binary = cv.threshold(crop_image,threshold,255,cv.THRESH_BINARY)
+    numpy_horizontal_concat = np.concatenate((crop_image, binary), axis=1)
+    #cv.imshow('image',binary)
+    
+    cv.imshow("test",numpy_horizontal_concat)
+    k = cv.waitKey(1) & 0xFF
+    if k == 13:
+        break
+
+cv.destroyWindow("test")
+#cv.destroyWindow("raw_data")
   
 contours, hierarchy = cv.findContours(binary, cv.RETR_TREE,
                                       cv.CHAIN_APPROX_NONE) #detecting contours
+
 
 #run a loop to get all contour areas
 contour_areas = list()
@@ -79,120 +72,94 @@ contour_index = list()
 bounding_rectangles = list()
 #centroids = list()
 
-min_area = 200
-border_size = 15
+
+border_size = 5
 
 w_max=20+2*border_size
 h_max=50+2*border_size
 
+#create a named window to show detected rois
+cv.namedWindow('ROI candidate', cv.WINDOW_NORMAL)
+
+min_area = 200
+max_area = 600
 for index,item in enumerate(contours):
     area = cv.contourArea(item)
 
     #print(area)
-    if area>min_area:
+    if area>min_area and area<max_area:
         #temp_left=
         
-        
-        contour_areas.append(area)
-        contour_index.append(index)
-        
         x,y,w,h = cv.boundingRect(item)
-        #print(x,y,w,h)
-        #ws.append(w)
-        #hs.append(h)
-        
-        bounding_rectangles.append([x-border_size,
+        temp_image=copy.deepcopy(crop_image)
+       
+        #added = False
+        while True:
+            cv.drawContours(temp_image, item, -1, 255, 1)
+            cv.rectangle(temp_image,(x,y),
+                                    (w,h),255,2)
+            cv.imshow('ROI candidate',temp_image)
+            k = cv.waitKey(33)
+            #print(k)
+            if  k == 121:
+                contour_areas.append(area)
+                contour_index.append(index)
+                bounding_rectangles.append([x-border_size,
                                     y-border_size,
                                     w_max,
                                     h_max])
+                break
+            elif k == 110:
+                break
         
-        #moment = cv.moments(item)
-        #centroidx = moment['m10']/moment['m00']
-        #centroidy = moment['m01']/moment['m00']
-        #centroids.append([centroidx,centroidy])
 
-#after finding the contours, we need to check the area of each contour,
-#using the "moment" of the images, if the areas are smaller than a certain value,
-#we use a mask to remove that contour as a valid contour.
+cv.destroyWindow("ROI candidate")
 
-# then these contours will be used as a grid map for ROIS going forward.
-#each contour will get a ROI with a rectanble bounding box around
-#then we calculate the pixel number on each box over time
-
-#as well as the length, width in each box.
-
-#all that data needs to go to a csv file with time stamps.
-drawing = np.ones(binary.shape, np.uint8)
-test=cv.drawContours(drawing, contours, -1, 255, 2)
-
-#cap.read()
-
-#create two windows to show the animal movement while in maze:
-cv.namedWindow('original image', cv.WINDOW_NORMAL)
-cv.namedWindow('binary maze plus ROIs', cv.WINDOW_NORMAL)
-#cv.namedWindow('contours', cv.WINDOW_NORMAL)
-
-
-#cv.imshow('contours',test)
-cv.imshow('original image',crop_image)
-cv.imshow('binary maze plus ROIs',binary)
-cv.waitKey(1)
-
-
-absolute_time_start = sf.time_in_millis()
-video_ongoing=True
-
-roi_raw_data = np.zeros([len(contour_areas),
-                        h_max,
-                        w_max,
-                        num_frames],dtype="int8")
-
-#roi_areas = pd.DataFrame(data=np.zeros([num_frames,len(contour_areas)]),
-#                    columns=range(1,len(contour_areas)+1))
-
-#roi_raw_data = pd.DataFrame(data=np.zeros([num_frames,len(contour_areas)]),
-#                   columns=range(1,len(contour_areas)+1))
-
-
-for frame in range(num_frames):
-    valid,gray = cap.read()
-    if not valid:
-        print("Can't receive frame (stream end?). Exiting ...")
-        break
+index=1
+for item in tqdm(bounding_rectangles): 
+    roi_raw_data = np.zeros([h_max,w_max,num_frames],dtype="int8")
     
-    crop_image = gray[crop_map[1]:crop_map[1]+crop_map[3],
+    for frame in range(num_frames):
+        valid,gray = cap.read()
+        cv.waitKey(1)
+        if not valid:
+            print("Can't receive frame (stream end?). Exiting ...")
+            break
+  
+        crop_image = gray[crop_map[1]:crop_map[1]+crop_map[3],
                       crop_map[0]:crop_map[0]+crop_map[2],0]
-    #ret,binary = cv.threshold(crop_image,threshold,255,cv.THRESH_BINARY)
-    #contours, hierarchy = cv.findContours(binary, cv.RETR_TREE,
-    #                                  cv.CHAIN_APPROX_NONE) #detecting contours
-    #cv.drawContours(drawing, contours, -1, (255,0,0), 1)
-    #cv.drawContours(drawing, contours, -1, (255,0,0), 1)
-    for index,item in enumerate(bounding_rectangles):
+
+       
+#         
         x = item[0]
         y = item[1]
         w = item[2]
         h = item[3]
-        cv.rectangle(binary,(x,y),(x+w,y+h),255,2)
+#         cv.rectangle(binary,(x,y),(x+w,y+h),255,2)
         one_roi = crop_image[y:y+h,x:x+w]
-        roi_raw_data[index,:,:,frame]=one_roi
-    #cv.imshow('contours',drawing)
-    #cv.imshow('original image',crop_image)
-    #cv.imshow('binary maze plus ROIs',one_roi)
+        roi_raw_data[:,:,frame]=one_roi
     
-    
-for index in range(roi_raw_data.shape[0]):
     print("saving ROI: ",index)
-    filename = "ROI{0}.npy".format(index)
+    filename = "./data/ROI{0}.npy".format(index)
     np.save(file=filename, arr=roi_raw_data[index])
-
-
+    index=index+1
+# #     #cv.imshow('contours',drawing)
+# #     #cv.imshow('original image',crop_image)
+# #     #cv.imshow('binary maze plus ROIs',one_roi)
+# #     
+# #
 # 
-# cv.namedWindow('gray1', cv.WINDOW_NORMAL)
-# cv.namedWindow('gray2', cv.WINDOW_NORMAL)
-# cv.namedWindow('gray3', cv.WINDOW_NORMAL)
-# cv.namedWindow('graysum', cv.WINDOW_NORMAL)
-# cv.imshow('gray1',gray[:,:,0])
-# cv.imshow('gray2',gray[:,:,1])
-# cv.imshow('gray3',gray[:,:,2])
-# cv.imshow('graysum',np.floor(np.sum(gray,2)/np.max(np.sum(gray,2))*255))
-# cv.waitKey(1)
+# for index in range(roi_raw_data.shape[0]):
+
+# # 
+# 
+# # 
+# # cv.namedWindow('gray1', cv.WINDOW_NORMAL)
+# # cv.namedWindow('gray2', cv.WINDOW_NORMAL)
+# # cv.namedWindow('gray3', cv.WINDOW_NORMAL)
+# # cv.namedWindow('graysum', cv.WINDOW_NORMAL)
+# # cv.imshow('gray1',gray[:,:,0])
+# # cv.imshow('gray2',gray[:,:,1])
+# # cv.imshow('gray3',gray[:,:,2])
+# # cv.imshow('graysum',np.floor(np.sum(gray,2)/np.max(np.sum(gray,2))*255))
+# # cv.waitKey(1)
