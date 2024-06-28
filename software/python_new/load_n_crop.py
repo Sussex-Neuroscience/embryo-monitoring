@@ -31,8 +31,8 @@ record_video = False
 
 #define where the video is coming from. Use 0 for the first camera on the computer,
 #or a complete file path to use a pre-recorded video
-video_input = '/home/andre/Dropbox/trabalho/converted.mp4'
-
+#video_input = '/home/andre/Dropbox/trabalho/converted.mp4'
+video_input = '/home/andre/Dropbox/trabalho/c.avi'
 
 #get the current date and time, so all files created do not overwrite existing data
 date_time = sf.get_current_time_formatted()
@@ -181,7 +181,8 @@ for frame in range(num_frames):
     
     
 for index in range(roi_raw_data.shape[0]):
-    filename = "ROI{0}".format(index)
+    print("saving ROI: ",index)
+    filename = "ROI{0}.npy".format(index)
     np.save(file=filename, arr=roi_raw_data[index])
 
 
