@@ -1,85 +1,11 @@
-import pandas as pd
-import cv2 as cv
+#import all needed libraries
 import numpy as np
-import time
-import os
-from tkinter import filedialog as fd
-from tkinter import *
-import csv
-
-
-def collect_metadata(animal_ID, session_ID):
-    ear_mark = input("Ear mark identifiers? (y/n): \n").lower()
-    weight = input("Insert animal weight (g): \n").lower()
-    birth_date = input("Insert animal birth date (dd/mm/yyyy): \n")
-    gender = input("Insert animal assumed gender (m/f): \n").lower()
-
-    data = {
-    "animal ID": animal_ID,
-    "session ID": session_ID,
-    "ear mark identifier": ear_mark,
-    "animal weight": weight,
-    "animal birth date": birth_date,
-    "animal gender": gender,
-    }
-
-    return data
-
-def save_metadata_to_csv(data, new_dir_path, file_name):
-    df = pd.DataFrame([data])  # Convert dict to dataframe
-    csv_path = os.path.join(new_dir_path, file_name)
-    df.to_csv(csv_path, index=False)
-    print(f"Metadata saved to: {csv_path}")
-
-
-def setup_directories(base_path, date_time, animal_ID, session_ID):
-    new_directory = f"{date_time}{animal_ID}{session_ID}"
-    new_dir_path = os.path.join(base_path, new_directory)
-    ensure_directory_exists(new_dir_path)
-    return new_dir_path
-
-def ensure_directory_exists(path):
-    if not os.path.exists(path):
-        os.makedirs(path)
-        print(f"Directory created: {path}")
-    else:
-        print(f"Directory already exists: {path}")
-
-def get_user_inputs():
-    animal_ID = input("Insert animal ID: \n").upper()
-    session_ID = input("Insert Session ID: \n").lower()
-    experiment_phase = int(input("Insert experiment phase (1-4): \n"))
-    return animal_ID, session_ID, experiment_phase
-
-def get_current_time_formatted():
-    return time.strftime('%Y-%m-%d_%H_%M_%S', time.localtime())
-
-def get_metadata():
-    anID = input("enter animal identification:")
-    date = input("enter date:")
-    sessionID = input("enter session identification")
-    metatada = [anID, date, sessionID]
-    #figure out what else users want to store
-    return metadata
-
-def write_text(text="string",window="noWindow"):
-    font                   = cv2.FONT_HERSHEY_SIMPLEX
-    bottomLeftCornerOfText = (10,500)
-    fontScale              = 1
-    fontColor              = (255,255,255)
-    thickness              = 1
-    lineType               = 2
-    
-    cv2.putText(window,text, 
-    bottomLeftCornerOfText, 
-    font, 
-    fontScale,
-    fontColor,
-    thickness,
-    lineType)
-    
-    return
-
+import cv2 as cv
+import supfun as sf
+from tqdm import tqdm
+from tqdm import trange
+import copy
+import pandas as pd
 
 def start_camera(videoInput=0):
     cap = cv.VideoCapture(videoInput)
@@ -88,175 +14,242 @@ def start_camera(videoInput=0):
         exit()
     return cap
 
-def record_video(cap, recordFile, frame_width, frame_height, fps):
-    cc = cv.VideoWriter_fourcc(*'XVID')
-    videoFileObject = cv.VideoWriter(recordFile, cc, fps, (frame_width, frame_height))
-    return videoFileObject
-    #if not videoFile.isOpened():
-    #    print("Error: Failed to create VideoWriter object.")
-    #    cap.release()
-    #    exit()
+def get_video_info(filename = 0):
+    cap = sf.start_camera(videoInput=filename)
 
-    #while True:
-    #    ret, frame = cap.read()
-    #    if ret:
-    #        videoFile.write(frame)
-    #        cv.imshow("Frame", frame)
-    #        if cv.waitKey(1) & 0xFF in [ord('q'), 27]:
-    #            break
-    #    else:
-    #        print("Error: Failed to read frame from camera.")
-    #        break
-
-    #videoFile.release()
-
-
-def grab_n_convert_frame(cameraHandle):
-    #capture a frame
-    ret, frame = cameraHandle.read()
-    #print(ret)
-    # Our operations on the frame come here
-    #gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-    gray=frame
-    return gray,ret 
-
-def csv_to_dict(fileName="rois.csv"):
-    output = dict()
-    temp =  pd.read_csv(fileName,index_col=0)
-    temp = temp.transpose()
-    output = temp.to_dict()
-    return output
-
-
-def define_rois(videoInput = 0,
-                roiNames = ["entrance1","entrance2",
-                             "rew1","rew2","rew3","rew4"],
-                outputName = "rois.csv"):
+    frame_width = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
+    frame_height = int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
+    fps = int(cap.get(cv.CAP_PROP_FPS))
     
-
-    cap = cv.VideoCapture(videoInput)
-    #cap = cv.VideoCapture(0)
-    if not cap.isOpened():
-        print("Cannot open camera")
-        exit()
-
-    # Capture frame-by-frame
-    ret, frame = cap.read()
-    # if frame is read correctly ret is True
-    if not ret:
-        print("Can't receive frame (stream end?). Exiting ...")
-        #break
-    # Our operations on the frame come here
-    gray = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
-    # Display the resulting frame
-    #cv.imshow('frame', gray)
-
-    #release the capture
+    if filename != 0:
+        num_frames = int(cap.get(cv.CAP_PROP_FRAME_COUNT))
+    else:
+        num_frames = "stream"
     cap.release()
-
-    rois = {}
-    for entry in roiNames:
-        print("please select location of "+str(entry))
-        rois[entry] = cv.selectROI('frame', gray)
-        #print(rois[entry])
     
-    df = pd.DataFrame(rois)
-    #print(df)
-    #print(roiNames)
-    df.index = ["xstart","ystart","xlen","ylen"]
-    df.to_csv(outputName,index=["xstart","ystart","xlen","ylen"])
-    #when all done destroy windows
-    cv.destroyAllWindows()
-
-    return df
-
-#def draw_on_video(frame=gray,roi=(0,0,0,0)):
-    #cv2.rectangle(frame, (roi[0], roi[1]), (roi[2], roi[3]), (0, 0, 0), -1)
+    info = {"frame_width":frame_width,
+            "frame_height":frame_height,
+            "fps":fps,
+            "num_frames": num_frames}
     
+    return info
 
-def grab_cut(frame,xstart,ystart,xlen,ylen):
+
+
+def detect_n_store_rois(filename="/home/andre/Desktop/M-Mov0007.avi",
+                        wanted_fps=2):
+#video_input="/home/andre/Dropbox/trabalho/c.avi"
+
+
+    cap = start_camera(videoInput=filename)
+    info = get_video_info(filename=filename)
     
-    cut = frame[ystart:ystart+ylen,
-                xstart:xstart+xlen]
-    return cut
+    frame_width = info["frame_width"]#int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
+    frame_height = info["frame_heigth"]#int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
+    fps = info["fps"]#int(cap.get(cv.CAP_PROP_FPS))
+    num_frames = info["num_frames"]#int(cap.get(cv.CAP_PROP_FRAME_COUNT))
 
-def create_trials(numTrials = 100, sessionStage = 2,nonRepeat=False):
-    
-    if sessionStage<1 or sessionStage>4:
-        print("invalid session stage, defaulting to stage 1 - habituation")
-        sessionStage=1
+    wanted_fps = 2
 
-    gratingMap = pd.read_csv("grating_maps.csv")
-    rewardSequences = pd.read_csv("reward_sequences.csv")
-
-    stage = rewardSequences[rewardSequences.sessionID=="Stage "+str(sessionStage)]
-    #lenRewLoc = len(stage.rewloc)
-
-    trialsDistribution = dict()
-    for index,location in enumerate(stage.rewloc):
-        subTrials = int(np.floor(numTrials*list(stage.portprob)[index]))
-        probRewardLocation = np.random.choice([True,False],numTrials,p=[list(stage.rewprob)[index],
-                                                                1-list(stage.rewprob)[index]])
         
-        #print(probRewardLocation)
-        trialTuples = list()
+    #threshold = 30
+    #grab one frame:
+    valid,gray = cap.read()
+    cv.namedWindow("frame", cv.WINDOW_NORMAL)
+
+    crop_map = cv.selectROI('frame', gray)
+    crop_image = gray[crop_map[1]:crop_map[1]+crop_map[3],
+                     crop_map[0]:crop_map[0]+crop_map[2],0]
+    cv.destroyWindow("frame")
+
+
+
+    threshold_slider_max = 255
+    #title_window = 'Linear Blend'
+
+    def nothing(x):
+        pass
+
+    #cv.namedWindow("raw_data")
+    #cv.namedWindow("image")
+    cv.namedWindow("test")
+    #cv.imshow("raw_data",crop_image)
+
+    cv.createTrackbar("threshold", 'test' , 70, threshold_slider_max, nothing)
+    print("press 'enter' after you decided on the threshold level")
+    while(1):
         
+        threshold = cv.getTrackbarPos('threshold','test')
+        ret,binary = cv.threshold(crop_image,threshold,255,cv.THRESH_BINARY)
+        numpy_horizontal_concat = np.concatenate((crop_image, binary), axis=1)
+        #cv.imshow('image',binary)
+        
+        cv.imshow("test",numpy_horizontal_concat)
+        k = cv.waitKey(1) & 0xFF
+        if k == 13:
+            break
+
+    cv.destroyWindow("test")
+    #cv.destroyWindow("raw_data")
+      
+    contours, hierarchy = cv.findContours(binary, cv.RETR_TREE,
+                                          cv.CHAIN_APPROX_NONE) #detecting contours
+
+
+    #run a loop to get all contour areas
+    contour_areas = list()
+    contour_index = list()
+    bounding_rectangles = list()
+    #centroids = list()
+
+
+    border_size = 5
+
+    w_max=20+border_size
+    h_max=50+border_size
+
+    #create a named window to show detected rois
+    cv.namedWindow('ROI candidate', cv.WINDOW_NORMAL)
+
+    min_area = 200
+    max_area = 600
+    for index,item in enumerate(contours):
+        area = cv.contourArea(item)
+
+        #print(area)
+        if area>min_area and area<max_area:
+            #temp_left=
             
-        for i in range(subTrials):
-            trialTuples.append((location,probRewardLocation[i],list(stage.wrongallowed)[index]))
+            x,y,w,h = cv.boundingRect(item)
+            temp_image=copy.deepcopy(crop_image)
+           
+            #added = False
+            while True:
+                cv.drawContours(temp_image, item, -1, 255, 1)
+                cv.rectangle(temp_image,(x-border_size,y-border_size),
+                                        (x+w+border_size,y+h+border_size),255,2)
+                cv.imshow('ROI candidate',temp_image)
+                k = cv.waitKey(33)
+                #print(k)
+                if  k == 121:
+                    contour_areas.append(area)
+                    contour_index.append(index)
+                    bounding_rectangles.append([x-border_size,
+                                        y-border_size,
+                                        w_max,
+                                        h_max])
+                    break
+                elif k == 110:
+                    break
+            
+
+    cv.destroyWindow("ROI candidate")
+    rectangles = pd.DataFrame(bounding_rectangles,columns=["x","y","w","h"])
+    #rectangles.to_json("./data/bounding_rectangles.json")
+    cap.release()
+    return rectangles,crop_map
+
+
+def extract_rois_slow(filename="/home/andre/Videos/M-Mov0007_compress.mp4",
+                      boundingrect_file="./data/bounding_rectangles.json",
+                      crop_map_file="./data/crop_map.npy"):
+    
+    bounding_rectanlges = pd.read_json(boundingrect_file)
+    crop_map = np.load(crop_map_file)
+    
+    info = get_video_info(filename=filename)
+    
+    frame_width = info["frame_width"]#int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
+    frame_height = info["frame_heigth"]#int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
+    fps = info["fps"]#int(cap.get(cv.CAP_PROP_FPS))
+    num_frames = info["num_frames"]#int(cap.get(cv.CAP_PROP_FRAME_COUNT))
+    
+    cap = sf.start_camera(videoInput=filename)
+    for index_roi in tqdm(trange(0,len(bounding_rectangles)),position=0):
+        roi_raw_data = np.zeros([h_max,w_max,num_frames],dtype="uint8")
+        index_frame=0
+        for frame in tqdm(trange(0,num_frames),position=1,leave=False):
+            #cap.set(cv.CAP_PROP_POS_FRAMES, frame-1)
+            valid,gray = cap.read()
+            cv.waitKey(1)
+            if not valid:
+                #cap.release()
+                #del(cap)
+                print("Can't receive frame (stream end?). Exiting ...")
+                break
+      
+            crop_image = gray[crop_map[1]:crop_map[1]+crop_map[3],
+                          crop_map[0]:crop_map[0]+crop_map[2],0]
+
+           
+
+            x = bounding_rectangles["x"][index_roi]
+            y = bounding_rectangles["y"][index_roi]
+            w = bounding_rectangles["w"][index_roi]
+            h = bounding_rectangles["h"][index_roi]
+
+            one_roi = crop_image[y:y+h,x:x+w]
+
+            roi_raw_data[:,:,index_frame]=one_roi
+            
+            index_frame=index_frame+1
+
+        #cap.release()
+        #del(cap)
+        print("saving ROI: ",index_roi)
+        cap.set(cv.CAP_PROP_POS_FRAMES, -1)
         
-        trialsDistribution[location] = trialTuples
+        out_filename = "./data/ROI{0}.npy".format(index_roi)
+        
+        np.save(file=out_filename, arr=roi_raw_data)
 
-    allTogether=list()
 
-    for item in trialsDistribution.keys():
-        allTogether+=(trialsDistribution[item])#this keeps the list flat
-                                               #(as opposed to a list of lists)
-
-    #now shuffle the list
-    np.random.shuffle(allTogether)
+def extract_rois_fast(filename="/home/andre/Videos/M-Mov0007_compress.mp4",
+                      boundingrect_file="./data/bounding_rectangles.json",
+                      crop_map_file="./data/crop_map.npy",
+                      out_location="./data/"):
     
-    if nonRepeat==True:
-        #rearrange the list so that two/three consecutive trials rewarding the same location never happens
-        for i in range(4):
-            for index in range(len(allTogether)-1):
-                if allTogether[index][0]==allTogether[index+1][0]:
-                    print("repeat coming up... fixing")
-                    temp = allTogether[index+1]
-                    allTogether.append(temp)
-                    allTogether.pop(index+1)
-
-
-    # create DataFrame using data
-    trials = pd.DataFrame(allTogether, columns =['rewlocation', 'givereward', 'wrongallowed'])
-
-    return trials
-
-# def choose_csv():
-#     root=Tk()
-#     # Show the file dialog and get the selected file name
-#     filename = fd.askopenfilename()
-#     # Print the file name to the console
-#     #print (filename)
-#     root.destroy()
-#     return filename
-
-def empty_frame(rows=300,roi_names=["entrance1","entrance2","rewA","rewB","rewC","rewD"]):
-    #create a dataframe that will contain only nans for all things to be measured.
-    #during the session we will fill up this df with data
+    bounding_rectangles = pd.read_json(boundingrect_file)
+    crop_map = np.load(crop_map_file)
     
-
-    columns = ["hit","miss","incorrect","rew_location","area_rewarded","time_to_reward",
-           "trial_start_time","end_trial_time","mouse_enter_time","first_reward_area_visited"]+roi_names
-    data = pd.DataFrame(None, index=range(rows), columns=columns)
-    return data
+    info = get_video_info(filename=filename)
     
-def time_in_millis():
-    millis=round(time.time() * 1000)
-    return millis
+    frame_width = info["frame_width"]#int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
+    frame_height = info["frame_height"]#int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
+    fps = info["fps"]#int(cap.get(cv.CAP_PROP_FPS))
+    num_frames = info["num_frames"]#int(cap.get(cv.CAP_PROP_FRAME_COUNT))
+    
+    cap = sf.start_camera(videoInput=filename)
+    h_max=bounding_rectangles["h"][0]
+    w_max=bounding_rectangles["w"][0]
+    all_data=np.zeros([h_max,w_max,num_frames,len(bounding_rectangles)],dtype="uint8")
+    for index_frame in tqdm(trange(num_frames),position=0,leave=False):
+        valid,gray = cap.read()
+        cv.waitKey(1)
+        if not valid:
+            #cap.release()
+            #del(cap)
+            print("Can't receive frame (stream end?). Exiting ...")
+            break
+        crop_image = gray[crop_map[1]:crop_map[1]+crop_map[3],
+                          crop_map[0]:crop_map[0]+crop_map[2],0]
+        
+        for index_roi in range(len(bounding_rectangles)):#tqdm(trange(len(bounding_rectangles)),position=1,leave=False):
+        
+            x = bounding_rectangles["x"][index_roi]
+            y = bounding_rectangles["y"][index_roi]
+            w = bounding_rectangles["w"][index_roi]
+            h = bounding_rectangles["h"][index_roi]
 
-def write_data(file_name="tests.csv",mode="a",data=["test","test","test"]):
-    data_fh = open(file_name,mode)
-    data_writer = csv.writer(data_fh, delimiter=',')
-    data_writer.writerow(data)
-    data_fh.close()
+            one_roi = crop_image[y:y+h,x:x+w]
+
+            all_data[:,:,index_frame,index_roi]=one_roi
+            
+            #index_frame=index_frame+1
+
+        
+        
+    for index_roi in tqdm(trange(len(all_data[0,0,0,:]))):
+        out_filename = out_location+"ROI{0}.npy".format(index_roi)
+        np.save(file=out_filename,arr=all_data[:,:,:,index_roi])
+        #np.save(file=out_filename, arr=roi_raw_data)
