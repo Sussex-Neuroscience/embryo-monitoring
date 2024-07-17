@@ -4,7 +4,8 @@ from tqdm import tqdm
 from tqdm import trange
 import supfun as sf
 
-filename = "/home/andre/Desktop/M-Mov0007.avi"
+filename = "/home/andre/Documents/onedrive/projects/open_hardware_projects/embryo_monitoring/M-Mov0007.avi"
+
 
 wanted_fps = 2
 

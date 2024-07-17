@@ -1,7 +1,6 @@
 #import all needed libraries
 import numpy as np
 import cv2 as cv
-import supfun as sf
 from tqdm import tqdm
 from tqdm import trange
 import copy
@@ -15,7 +14,7 @@ def start_camera(videoInput=0):
     return cap
 
 def get_video_info(filename = 0):
-    cap = sf.start_camera(videoInput=filename)
+    cap = start_camera(videoInput=filename)
 
     frame_width = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
     frame_height = int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
@@ -37,7 +36,8 @@ def get_video_info(filename = 0):
 
 
 def detect_n_store_rois(filename="/home/andre/Desktop/M-Mov0007.avi",
-                        wanted_fps=2):
+                        #wanted_fps=2
+                        ):
 #video_input="/home/andre/Dropbox/trabalho/c.avi"
 
 
@@ -45,11 +45,11 @@ def detect_n_store_rois(filename="/home/andre/Desktop/M-Mov0007.avi",
     info = get_video_info(filename=filename)
     
     frame_width = info["frame_width"]#int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
-    frame_height = info["frame_heigth"]#int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
+    frame_height = info["frame_height"]#int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
     fps = info["fps"]#int(cap.get(cv.CAP_PROP_FPS))
     num_frames = info["num_frames"]#int(cap.get(cv.CAP_PROP_FRAME_COUNT))
 
-    wanted_fps = 2
+    #wanted_fps = 2
 
         
     #threshold = 30
@@ -103,7 +103,7 @@ def detect_n_store_rois(filename="/home/andre/Desktop/M-Mov0007.avi",
     #centroids = list()
 
 
-    border_size = 5
+    border_size = 6
 
     w_max=20+border_size
     h_max=50+border_size
@@ -126,16 +126,20 @@ def detect_n_store_rois(filename="/home/andre/Desktop/M-Mov0007.avi",
             #added = False
             while True:
                 cv.drawContours(temp_image, item, -1, 255, 1)
-                cv.rectangle(temp_image,(x-border_size,y-border_size),
-                                        (x+w+border_size,y+h+border_size),255,2)
+                #coordinates = 
+                cv.rectangle(temp_image,(int((x+w_max)/2-(w_max/2)),
+                                         int((y+h_max)/2-(h_max/2))),
+                                         (int((x+w_max)/2+(w_max/2)),
+                                          int((y+h_max)/2+(h_max/2))),
+                                         255,2)
                 cv.imshow('ROI candidate',temp_image)
                 k = cv.waitKey(33)
                 #print(k)
                 if  k == 121:
                     contour_areas.append(area)
                     contour_index.append(index)
-                    bounding_rectangles.append([x-border_size,
-                                        y-border_size,
+                    bounding_rectangles.append([x-2*border_size,
+                                        y-2*border_size,
                                         w_max,
                                         h_max])
                     break
@@ -164,7 +168,7 @@ def extract_rois_slow(filename="/home/andre/Videos/M-Mov0007_compress.mp4",
     fps = info["fps"]#int(cap.get(cv.CAP_PROP_FPS))
     num_frames = info["num_frames"]#int(cap.get(cv.CAP_PROP_FRAME_COUNT))
     
-    cap = sf.start_camera(videoInput=filename)
+    cap = start_camera(videoInput=filename)
     for index_roi in tqdm(trange(0,len(bounding_rectangles)),position=0):
         roi_raw_data = np.zeros([h_max,w_max,num_frames],dtype="uint8")
         index_frame=0
@@ -219,7 +223,7 @@ def extract_rois_fast(filename="/home/andre/Videos/M-Mov0007_compress.mp4",
     fps = info["fps"]#int(cap.get(cv.CAP_PROP_FPS))
     num_frames = info["num_frames"]#int(cap.get(cv.CAP_PROP_FRAME_COUNT))
     
-    cap = sf.start_camera(videoInput=filename)
+    cap = start_camera(videoInput=filename)
     h_max=bounding_rectangles["h"][0]
     w_max=bounding_rectangles["w"][0]
     all_data=np.zeros([h_max,w_max,num_frames,len(bounding_rectangles)],dtype="uint8")

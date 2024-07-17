@@ -9,11 +9,11 @@ import copy
 import pandas as pd
 
 
-detect_rois=False
+detect_rois=True
 
 #filename = "/home/andre/Desktop/M-Mov0007.avi"
 #filename = "./data/corrected.avi"
-filename = "/home/andre/Videos/M-Mov0007_compress.mp4"
+filename = "/home/andre/Documents/onedrive/projects/open_hardware_projects/embryo_monitoring/M-Mov0007_compress.mp4"
 
 #wanted_fps = 2
 
@@ -28,7 +28,7 @@ cap.release()
 wanted_fps = 2
 
 if detect_rois:
-    bounding_rectangles,crop_map = sf.detect_n_store_rois(filename=filename, wanted_fps = wanted_fps)
+    bounding_rectangles,crop_map = sf.detect_n_store_rois(filename=filename) #wanted_fps = wanted_fps)
     bounding_rectangles.to_json("./data/bounding_rectangles.json")
     np.save("./data/crop_map.npy",crop_map)
 
