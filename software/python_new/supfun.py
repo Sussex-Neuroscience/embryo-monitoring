@@ -89,7 +89,7 @@ def detect_n_store_rois(filename="/home/andre/Desktop/M-Mov0007.avi",
     info = get_video_info(filename=filename)
     
     valid,gray = cap.read()
-    
+    gray=gray[:,:,0]
     ret,binary = cv.threshold(gray,threshold,255,cv.THRESH_BINARY)  
     contours, _ = cv.findContours(binary, cv.RETR_TREE,
                                           cv.CHAIN_APPROX_NONE) #detecting contours
@@ -152,6 +152,7 @@ def detect_n_store_rois(filename="/home/andre/Desktop/M-Mov0007.avi",
 def extract_rois_fast(filename="/home/andre/Videos/M-Mov0007_compress.mp4",
                       boundingrect_file="./data/bounding_rectangles.json",
                       #crop_image_file="./data/crop_image.npy",
+                      threshold=70,
                       out_location="./data/"):
     
     bounding_rectangles = pd.read_json(boundingrect_file)
@@ -185,7 +186,7 @@ def extract_rois_fast(filename="/home/andre/Videos/M-Mov0007_compress.mp4",
             w = bounding_rectangles["w"][index_roi]
             h = bounding_rectangles["h"][index_roi]
 
-            one_roi = gray[y:y+h,x:x+w]
+            one_roi = gray[y:y+h,x:x+w,0]
 
             all_data[0:one_roi.shape[0],0:one_roi.shape[1],index_frame,index_roi]=one_roi
             

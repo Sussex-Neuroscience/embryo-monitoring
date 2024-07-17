@@ -9,11 +9,11 @@ import copy
 import pandas as pd
 
 define_threshold=False
-detect_rois=True
+detect_rois=False
 extract_rois=True
-#filename = "/home/andre/Desktop/M-Mov0007.avi"
-#filename = "./data/corrected.avi"
-video_name = "/home/andre/Documents/onedrive/projects/open_hardware_projects/embryo_monitoring/M-Mov0007_compress.mp4"
+
+#video_name = "/home/andre/Documents/onedrive/projects/open_hardware_projects/embryo_monitoring/M-Mov0007_compress.mp4"
+video_name = "/home/andre/Videos/output.mp4"
 
 #wanted_fps = 2
 
