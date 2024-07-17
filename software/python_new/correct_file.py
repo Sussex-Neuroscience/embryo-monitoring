@@ -1,3 +1,9 @@
+"""correct_file.py
+
+script to grab a specific number of frames from a file in order to reduce it. 
+Initially implemented as there seemed to be something wrong with the data file (seemed to have 100FPS when it should be 2FPS)
+"""
+
 import cv2 as cv
 import numpy as np
 from tqdm import tqdm
