@@ -17,7 +17,7 @@ extract_rois=True
 #ffmpeg -i input_filename.avi -c:v copy -c:a copy -y output_filename.mp4
 
 #video_name = "/home/andre/Documents/onedrive/projects/open_hardware_projects/embryo_monitoring/M-Mov0007_compress.mp4"
-video_name = "/home/andre/Videos/output.mp4"
+video_name = "/home/andre/Videos/output_gray1.avi"
 
 #wanted_fps = 2
 

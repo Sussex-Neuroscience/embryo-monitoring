@@ -5,8 +5,12 @@ from matplotlib import transforms
 #test = np.random.randint(low=0,high=255,size=(25,15))
 plot = True
 all_data = np.load("./data/ROI00.npy")
-threshold_value = 70
+with open("./data/threshold.txt","r") as fid:
+    threshold_value = fid.readline()
+
+
 thresholds= all_data>threshold_value
+
 mean_brightness=np.zeros([all_data.shape[2],1])
 
 # for i in range(0,all_data.shape[2],1):

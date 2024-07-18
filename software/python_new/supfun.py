@@ -128,10 +128,9 @@ def detect_n_store_rois(filename="/home/andre/Desktop/M-Mov0007.avi",
                 if  k == 121:
                     contour_areas.append(area)
                     contour_index.append(index)
-                    bounding_rectangles.append([x-border_size,
-                                        y-border_size,
-                                        border_size+w,
-                                        border_size+h])
+                    bounding_rectangles.append([x,y,
+                                                w,h,
+                                                border_size])
                     break
                 elif k == 110:
                     break
@@ -139,7 +138,7 @@ def detect_n_store_rois(filename="/home/andre/Desktop/M-Mov0007.avi",
 
     cv.destroyWindow("ROI candidate")
     cap.release()
-    rectangles = pd.DataFrame(bounding_rectangles,columns=["x","y","w","h"])
+    rectangles = pd.DataFrame(bounding_rectangles,columns=["x","y","w","h","border"])
     sorted_rectangles=rectangles.sort_values(by=['x', 'y'])
     #rectangles.to_json("./data/bounding_rectangles.json")
     
@@ -165,8 +164,9 @@ def extract_rois_fast(filename="/home/andre/Videos/M-Mov0007_compress.mp4",
     cap = start_camera(videoInput=filename)
     h_max=max(bounding_rectangles["h"])
     w_max=max(bounding_rectangles["w"])
+    border = bounding_rectangles["border"][0]
     
-    all_data=np.zeros([h_max,w_max,num_frames,len(bounding_rectangles)],dtype="uint8")
+    all_data=np.zeros([h_max+2*border,w_max+2*border,num_frames,len(bounding_rectangles)],dtype="uint8")
     
     for index_frame in tqdm(trange(num_frames),position=0,leave=False):
         valid,gray = cap.read()
@@ -185,10 +185,10 @@ def extract_rois_fast(filename="/home/andre/Videos/M-Mov0007_compress.mp4",
             y = bounding_rectangles["y"][index_roi]
             w = bounding_rectangles["w"][index_roi]
             h = bounding_rectangles["h"][index_roi]
+            border = bounding_rectangles["border"][index_roi]
+            one_roi = gray[y-border:y+h+border,x-border:x+w+border,0]
 
-            one_roi = gray[y:y+h,x:x+w,0]
-
-            all_data[0:one_roi.shape[0],0:one_roi.shape[1],index_frame,index_roi]=one_roi
+            all_data[0:one_roi.shape[0],0:one_roi.shape[1],index_frame,index_roi] = one_roi
             
             #index_frame=index_frame+1
 
