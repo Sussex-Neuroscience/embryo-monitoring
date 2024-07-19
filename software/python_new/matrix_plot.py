@@ -38,13 +38,14 @@ thresholds= all_data>threshold_value
 #thresh=test>30
 #test_mask=test*thresh
 # 
-# fig, axs = plt.subplots(2,3)
+
 # 
 # 
-# base = plt.gca().transData
-# rot = transforms.Affine2D().rotate_deg(-90)
 # plt.ion()
-# 
+#
+fig, axs = plt.subplots(2,3)
+base = plt.gca().transData
+rot = transforms.Affine2D().rotate_deg(-90)
 for i in range(0,all_data.shape[2],100):
     print("frame ", i)
 

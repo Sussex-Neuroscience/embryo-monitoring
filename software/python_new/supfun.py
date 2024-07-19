@@ -57,18 +57,18 @@ def define_threshold(filename="/home/andre/Desktop/M-Mov0007.avi",
         pass
 
 
-    cv.namedWindow("threshold",WINDOW_NORMAL)
+    cv.namedWindow("threshold",cv.WINDOW_NORMAL)
 
-    cv.createTrackbar("threshold", 'test' , 70, threshold_slider_max, nothing)
+    cv.createTrackbar("threshold_bar", 'threshold' , 70, threshold_slider_max, nothing)
     print("press 'enter' after you decided on the threshold level")
     while(1):
         
-        threshold = cv.getTrackbarPos('threshold','test')
+        threshold = cv.getTrackbarPos('threshold_bar','threshold')
         ret,binary = cv.threshold(gray,threshold,255,cv.THRESH_BINARY)
         numpy_horizontal_concat = np.concatenate((gray, binary), axis=1)
         #cv.imshow('image',binary)
         
-        cv.imshow("test",numpy_horizontal_concat)
+        cv.imshow("threshold",numpy_horizontal_concat)
         k = cv.waitKey(1) & 0xFF
         if k == 13:
             break
@@ -186,7 +186,7 @@ def extract_rois_fast(filename="/home/andre/Videos/M-Mov0007_compress.mp4",
             w = bounding_rectangles["w"][index_roi]
             h = bounding_rectangles["h"][index_roi]
             border = bounding_rectangles["border"][index_roi]
-            one_roi = gray[y-border:y+h_max+border,x-border:x+w_max+border,0]
+            one_roi = gray[y-2*border:y+h_max,x-2*border:x+w_max,0]
 
             all_data[0:one_roi.shape[0],0:one_roi.shape[1],index_frame,index_roi] = one_roi
             
