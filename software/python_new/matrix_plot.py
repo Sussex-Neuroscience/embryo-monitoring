@@ -1,17 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import transforms
+import supfun as sf
 #import time
 #test = np.random.randint(low=0,high=255,size=(25,15))
 plot = True
 all_data = np.load("./data/ROI00.npy")
 with open("./data/threshold.txt","r") as fid:
-    threshold_value = fid.readline()
+    threshold_value = int(fid.readline())-10
 
+mean_brightness = sf.calculate_brightness(data=all_data)
+moving_average = sf.calculate_moving_average(data=mean_brightness,window_size = 60)
+squared = sf.square_square_root(data=moving_average)
 
 thresholds= all_data>threshold_value
 
-mean_brightness=np.zeros([all_data.shape[2],1])
 
 # for i in range(0,all_data.shape[2],1):
 #     embryo = all_data[:,:,i][thresholds[:,:,0]]
@@ -34,14 +37,14 @@ mean_brightness=np.zeros([all_data.shape[2],1])
 #test=all_data[:,:,0	]
 #thresh=test>30
 #test_mask=test*thresh
-
-fig, axs = plt.subplots(1,3)
-
-
-base = plt.gca().transData
-rot = transforms.Affine2D().rotate_deg(-90)
-plt.ion()
-
+# 
+# fig, axs = plt.subplots(2,3)
+# 
+# 
+# base = plt.gca().transData
+# rot = transforms.Affine2D().rotate_deg(-90)
+# plt.ion()
+# 
 for i in range(0,all_data.shape[2],100):
     print("frame ", i)
 
@@ -56,26 +59,31 @@ for i in range(0,all_data.shape[2],100):
 
     if plot:
         
-        axs[0].imshow(frame,cmap="binary_r",vmin=0,vmax=300)
+        axs[0][0].imshow(frame,cmap="binary_r",vmin=0,vmax=300)
 
 
-        axs[1].imshow(frame_mask,cmap="binary_r",vmin=0,vmax=300)
+        axs[0][1].imshow(frame_mask,cmap="binary_r",vmin=0,vmax=300)
         
 
-        axs[2].plot(vertical_collapse/np.max(vertical_collapse)*256,transform= rot + base)
-
-        #axs[1][1].plot(horizontal_collapse/np.max(horizontal_collapse)*255)
-
+        axs[0][2].plot(vertical_collapse/np.max(vertical_collapse)*256,transform= rot + base)
+        plt.show()
+        axs[1][1].plot(horizontal_collapse/np.max(horizontal_collapse)*255)
+        plt.show()
         #axs[0][2].set_title("thresholded")
-        axs[0].set_title("thresholded")
-        axs[0].set_title("raw_data")
+        axs[0][1].set_title("thresholded")
+        axs[0][0].set_title("raw_data")
+        axs[0][2].set_title("vertical_average")
+        axs[1][1].set_title("horizontal_average")
         plt.show()
         plt.pause(0.01)
 
-        axs[0].cla()
-        axs[1].cla()
-        axs[2].cla()
-        #axs[1][1].cla()
+        axs[0][0].cla()
+        axs[0][1].cla()
+        axs[0][2].cla()
+        axs[1][1].cla()
+
+
+
 # #test[range(len(test.argmax(1))),test.argmax(1)]=500
 # 
 # #axs[0].colorbar()

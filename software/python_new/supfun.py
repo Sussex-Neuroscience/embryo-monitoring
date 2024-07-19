@@ -57,7 +57,7 @@ def define_threshold(filename="/home/andre/Desktop/M-Mov0007.avi",
         pass
 
 
-    cv.namedWindow("test")
+    cv.namedWindow("threshold",WINDOW_NORMAL)
 
     cv.createTrackbar("threshold", 'test' , 70, threshold_slider_max, nothing)
     print("press 'enter' after you decided on the threshold level")
@@ -73,7 +73,7 @@ def define_threshold(filename="/home/andre/Desktop/M-Mov0007.avi",
         if k == 13:
             break
 
-    cv.destroyWindow("test")
+    cv.destroyWindow("threshold")
     
     return threshold#crop_map, threshold,crop_image
 
@@ -186,7 +186,7 @@ def extract_rois_fast(filename="/home/andre/Videos/M-Mov0007_compress.mp4",
             w = bounding_rectangles["w"][index_roi]
             h = bounding_rectangles["h"][index_roi]
             border = bounding_rectangles["border"][index_roi]
-            one_roi = gray[y-border:y+h+border,x-border:x+w+border,0]
+            one_roi = gray[y-border:y+h_max+border,x-border:x+w_max+border,0]
 
             all_data[0:one_roi.shape[0],0:one_roi.shape[1],index_frame,index_roi] = one_roi
             
@@ -203,6 +203,43 @@ def extract_rois_fast(filename="/home/andre/Videos/M-Mov0007_compress.mp4",
         out_filename = out_location+"ROI"+name_roi+".npy"
         np.save(file=out_filename,arr=all_data[:,:,:,index_roi])
         #np.save(file=out_filename, arr=roi_raw_data)
+
+def calculate_brightness(data=[1,1,1,1]):
+    mean_brightness_raw = np.mean(data,0)
+    mean_brightness_raw = np.mean(mean_brightness_raw,0)
+    return mean_brightness_raw
+
+
+def calculate_moving_average(data=[1,1,1,1],window_size=60):
+    i = 0
+    # Initialize an empty list to store moving averages
+    moving_average = []
+    #data = list(data)
+    # Loop through the array to consider
+    # every window of size 3
+    while i < len(data) - window_size + 1:
+   
+        # Store elements from i to i+window_size
+        # in list to get the current window
+        window = data[i : i + window_size]
+ 
+        # Calculate the average of current window
+        window_average = round(sum(window) / window_size, 2)
+     
+        # Store the average of current
+        # window in moving average list
+        moving_average.append(window_average)
+     
+        # Shift window to right by one position
+        i += 1
+    moving_average = np.array(moving_average)
+    return moving_average
+
+def square_square_root(data = [1,1,1,1]):
+    powers = [2]*len(data)
+    squared = np.pow(data,powers)
+    sqrt = np.sqrt(squared)
+    return sqrt
 
 # def extract_rois_slow(filename="/home/andre/Videos/M-Mov0007_compress.mp4",
 #                       boundingrect_file="./data/bounding_rectangles.json",
