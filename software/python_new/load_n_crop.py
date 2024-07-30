@@ -8,8 +8,8 @@ from tqdm import trange
 import copy
 import pandas as pd
 
-define_threshold=True
-detect_rois=True
+define_threshold=False
+detect_rois=False
 extract_rois=True
 
 

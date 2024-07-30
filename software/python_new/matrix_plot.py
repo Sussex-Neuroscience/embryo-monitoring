@@ -4,7 +4,7 @@ from matplotlib import transforms
 import supfun as sf
 #import time
 #test = np.random.randint(low=0,high=255,size=(25,15))
-plot = True
+plot = False
 all_data = np.load("./data/ROI00.npy")
 with open("./data/threshold.txt","r") as fid:
     threshold_value = int(fid.readline())-10
@@ -39,17 +39,26 @@ thresholds= all_data>threshold_value
 #test_mask=test*thresh
 # 
 
-# 
-# 
-# plt.ion()
-#
-fig, axs = plt.subplots(2,3)
-base = plt.gca().transData
-rot = transforms.Affine2D().rotate_deg(-90)
+
+vertical_maxima = list()
+vertical_minima = list()
+vertical_length = list()
+vertical_max_bright = list()
+
+horizontal_maxima = list()
+horizontal_minima = list()
+horizontal_length = list()
+horizontal_max_bright = list()
+
+
+if plot:
+    fig, axs = plt.subplots(2,3)
+    base = plt.gca().transData
+    rot = transforms.Affine2D().rotate_deg(-90)
 for i in range(0,all_data.shape[2],100):
-    print("frame ", i)
+    #print("frame ", i)
 
-
+    
     frame = all_data[:,:,i]
     #thresh=frame>threshold_value
     frame_mask=frame*thresholds[:,:,i]
@@ -57,7 +66,25 @@ for i in range(0,all_data.shape[2],100):
     #sum values over rows, so that we can get an idea of vertical brightness distributions
     vertical_collapse = frame_mask.sum(axis=1)
     horizontal_collapse = frame_mask.sum(axis=0)
-
+    if len(vertical_collapse.nonzero()[0])>0:
+        vertical_maxima.append(np.nonzero(vertical_collapse)[0][0])
+        vertical_minima.append(np.nonzero(vertical_collapse)[0][-1])
+        vertical_max_bright.append(np.argmax(vertical_collapse))
+        horizontal_maxima.append(np.nonzero(horizontal_collapse)[0][0])
+        horizontal_minima.append(np.nonzero(horizontal_collapse)[0][-1])
+        horizontal_max_bright.append(np.argmax(horizontal_collapse))
+        vertical_length.append(np.sum(vertical_collapse>0))
+        horizontal_length.append(np.sum(horizontal_collapse>0))
+    else:
+        vertical_maxima.append(0)
+        vertical_minima.append(0)
+        vertical_max_bright.append(0)
+        horizontal_maxima.append(0)
+        horizontal_minima.append(0)
+        horizontal_max_bright.append(0)
+        vertical_length.append(0)
+        horizontal_length.append(0)
+    
     if plot:
         
         axs[0][0].imshow(frame,cmap="binary_r",vmin=0,vmax=300)
@@ -84,7 +111,15 @@ for i in range(0,all_data.shape[2],100):
         axs[1][1].cla()
 
 
+plt.figure();plt.plot(horizontal_length,vertical_length,'bo')
+plt.figure()
+plt.plot(vertical_maxima,'go');plt.plot(vertical_minima,'bo')
+plt.figure();plt.plot(horizontal_maxima,'ro');plt.plot(horizontal_minima,'ko')
+plt.figure();plt.plot(horizontal_length,vertical_length,'bo')
 
+
+
+plt.show()
 # #test[range(len(test.argmax(1))),test.argmax(1)]=500
 # 
 # #axs[0].colorbar()
