@@ -39,16 +39,23 @@ thresholds= all_data>threshold_value
 #test_mask=test*thresh
 # 
 
-
-vertical_maxima = list()
 vertical_minima = list()
-vertical_length = list()
+vertical_maxima = list()
 vertical_max_bright = list()
+vertical_length = list()
 
-horizontal_maxima = list()
 horizontal_minima = list()
-horizontal_length = list()
+horizontal_maxima = list()
 horizontal_max_bright = list()
+horizontal_length = list()
+
+def calculate_moments_histogram(data):
+    minimum_index = np.nonzero(data)[0][0]
+    maximum_index = np.nonzero(data)[0][-1]
+    index_highest_value = np.argmax(data)
+    number_of_nonzero_pixels = np.sum(data>0)
+    return [minimum_index,maximum_index,index_highest_value,number_of_nonzero_pixels]
+
 
 
 if plot:
@@ -67,24 +74,23 @@ for i in range(0,all_data.shape[2],100):
     vertical_collapse = frame_mask.sum(axis=1)
     horizontal_collapse = frame_mask.sum(axis=0)
     if len(vertical_collapse.nonzero()[0])>0:
-        vertical_maxima.append(np.nonzero(vertical_collapse)[0][0])
-        vertical_minima.append(np.nonzero(vertical_collapse)[0][-1])
-        vertical_max_bright.append(np.argmax(vertical_collapse))
-        horizontal_maxima.append(np.nonzero(horizontal_collapse)[0][0])
-        horizontal_minima.append(np.nonzero(horizontal_collapse)[0][-1])
-        horizontal_max_bright.append(np.argmax(horizontal_collapse))
-        vertical_length.append(np.sum(vertical_collapse>0))
-        horizontal_length.append(np.sum(horizontal_collapse>0))
+        result = calculate_moments_histogram(vertical_collapse)
+        result1 = calculate_moments_histogram(horizontal_collapse)
+
     else:
-        vertical_maxima.append(0)
-        vertical_minima.append(0)
-        vertical_max_bright.append(0)
-        horizontal_maxima.append(0)
-        horizontal_minima.append(0)
-        horizontal_max_bright.append(0)
-        vertical_length.append(0)
-        horizontal_length.append(0)
+        result = [0,0,0,0]
+        result1 = [0,0,0,0]
     
+    vertical_minima.append(result[0])
+    vertical_maxima.append(result[1])
+    vertical_max_bright.append(result[2])
+    vertical_length.append(result[2])
+    
+    horizontal_minima.append(result1[0])
+    horizontal_maxima.append(result1[1])
+    horizontal_max_bright.append(result1[2])
+    horizontal_length.append(result1[2])
+        
     if plot:
         
         axs[0][0].imshow(frame,cmap="binary_r",vmin=0,vmax=300)
@@ -111,11 +117,14 @@ for i in range(0,all_data.shape[2],100):
         axs[1][1].cla()
 
 
-plt.figure();plt.plot(horizontal_length,vertical_length,'bo')
-plt.figure()
-plt.plot(vertical_maxima,'go');plt.plot(vertical_minima,'bo')
-plt.figure();plt.plot(horizontal_maxima,'ro');plt.plot(horizontal_minima,'ko')
-plt.figure();plt.plot(horizontal_length,vertical_length,'bo')
+time_index = np.linspace(start=0, stop=len(horizontal_length),num=len(horizontal_length),dtype=int, endpoint=False)
+
+
+#plt.figure();plt.plot(horizontal_length,vertical_length,'bo')
+#plt.figure()
+#plt.plot(vertical_maxima,'go');plt.plot(vertical_minima,'bo')
+#plt.figure();plt.plot(horizontal_maxima,'ro');plt.plot(horizontal_minima,'ko')
+#plt.figure();plt.plot(horizontal_length,vertical_length,'bo')
 
 
 
