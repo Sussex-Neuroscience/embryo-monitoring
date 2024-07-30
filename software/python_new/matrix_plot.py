@@ -5,9 +5,9 @@ import supfun as sf
 #import time
 #test = np.random.randint(low=0,high=255,size=(25,15))
 plot = False
-all_data = np.load("./data/ROI00.npy")
+all_data = np.load("./data/ROI01.npy")
 with open("./data/threshold.txt","r") as fid:
-    threshold_value = int(fid.readline())-10
+    threshold_value = int(fid.readline())+10
 
 mean_brightness = sf.calculate_brightness(data=all_data)
 moving_average = sf.calculate_moving_average(data=mean_brightness,window_size = 60)
@@ -62,7 +62,7 @@ if plot:
     fig, axs = plt.subplots(2,3)
     base = plt.gca().transData
     rot = transforms.Affine2D().rotate_deg(-90)
-for i in range(0,all_data.shape[2],100):
+for i in range(0,all_data.shape[2],50):
     #print("frame ", i)
 
     
@@ -118,17 +118,20 @@ for i in range(0,all_data.shape[2],100):
 
 
 time_index = np.linspace(start=0, stop=len(horizontal_length),num=len(horizontal_length),dtype=int, endpoint=False)
-
-
+#plt.figure()
+#plt.scatter(horizontal_length,vertical_length,c=time_index,cmap="PiYG")
+#plt.colorbar(orientation="horizontal", label="time")
+#plt.show()
 #plt.figure();plt.plot(horizontal_length,vertical_length,'bo')
 #plt.figure()
 #plt.plot(vertical_maxima,'go');plt.plot(vertical_minima,'bo')
 #plt.figure();plt.plot(horizontal_maxima,'ro');plt.plot(horizontal_minima,'ko')
 #plt.figure();plt.plot(horizontal_length,vertical_length,'bo')
 
-
-
+ax = plt.axes(projection='3d')
+ax.scatter3D(horizontal_length,vertical_length,time_index,"bo")
 plt.show()
+#plt.show()
 # #test[range(len(test.argmax(1))),test.argmax(1)]=500
 # 
 # #axs[0].colorbar()
