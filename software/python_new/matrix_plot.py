@@ -4,10 +4,10 @@ from matplotlib import transforms
 import supfun as sf
 #import time
 #test = np.random.randint(low=0,high=255,size=(25,15))
-plot = False
-all_data = np.load("./data/ROI01.npy")
+plot = True
+all_data = np.load("./data/ROI00.npy")
 with open("./data/threshold.txt","r") as fid:
-    threshold_value = int(fid.readline())+10
+    threshold_value = int(fid.readline())-30
 
 mean_brightness = sf.calculate_brightness(data=all_data)
 moving_average = sf.calculate_moving_average(data=mean_brightness,window_size = 60)
@@ -62,7 +62,7 @@ if plot:
     fig, axs = plt.subplots(2,3)
     base = plt.gca().transData
     rot = transforms.Affine2D().rotate_deg(-90)
-for i in range(0,all_data.shape[2],50):
+for i in range(0,all_data.shape[2],1):
     #print("frame ", i)
 
     
@@ -92,23 +92,6 @@ for i in range(0,all_data.shape[2],50):
     horizontal_length.append(result1[2])
         
     if plot:
-        
-        axs[0][0].imshow(frame,cmap="binary_r",vmin=0,vmax=300)
-
-
-        axs[0][1].imshow(frame_mask,cmap="binary_r",vmin=0,vmax=300)
-        
-
-        axs[0][2].plot(vertical_collapse/np.max(vertical_collapse)*256,transform= rot + base)
-        plt.show()
-        axs[1][1].plot(horizontal_collapse/np.max(horizontal_collapse)*255)
-        plt.show()
-        #axs[0][2].set_title("thresholded")
-        axs[0][1].set_title("thresholded")
-        axs[0][0].set_title("raw_data")
-        axs[0][2].set_title("vertical_average")
-        axs[1][1].set_title("horizontal_average")
-        plt.show()
         plt.pause(0.01)
 
         axs[0][0].cla()
@@ -116,8 +99,28 @@ for i in range(0,all_data.shape[2],50):
         axs[0][2].cla()
         axs[1][1].cla()
 
+        axs[0][0].imshow(frame,cmap="binary_r",vmin=0,vmax=300)
+
+
+        axs[0][1].imshow(frame_mask,cmap="binary_r",vmin=0,vmax=300)
+        
+
+        axs[0][2].plot(vertical_collapse/np.max(vertical_collapse)*256,transform= rot + base)
+        #plt.show()
+        #axs[1][1].plot(horizontal_collapse/np.max(horizontal_collapse)*256)
+        #plt.show()
+        #axs[0][2].set_title("thresholded")
+        #axs[0][1].set_title("thresholded")
+        #axs[0][0].set_title("raw_data")
+        #axs[0][2].set_title("vertical_average")
+        #axs[1][1].set_title("horizontal_average")
+        #plt.show()
+
 
 time_index = np.linspace(start=0, stop=len(horizontal_length),num=len(horizontal_length),dtype=int, endpoint=False)
+vertical_diff = np.diff(vertical_length,append=0,n=1)/(1/2)
+horizontal_diff=np.diff(horizontal_length,append=0,n=1)/(1/2)
+
 #plt.figure()
 #plt.scatter(horizontal_length,vertical_length,c=time_index,cmap="PiYG")
 #plt.colorbar(orientation="horizontal", label="time")
@@ -128,9 +131,12 @@ time_index = np.linspace(start=0, stop=len(horizontal_length),num=len(horizontal
 #plt.figure();plt.plot(horizontal_maxima,'ro');plt.plot(horizontal_minima,'ko')
 #plt.figure();plt.plot(horizontal_length,vertical_length,'bo')
 
-ax = plt.axes(projection='3d')
-ax.scatter3D(horizontal_length,vertical_length,time_index,"bo")
-plt.show()
+#ax = plt.axes(projection='3d')
+#ax.scatter3D(horizontal_length,vertical_length,time_index,"bo")
+#plt.show()
+
+
+
 #plt.show()
 # #test[range(len(test.argmax(1))),test.argmax(1)]=500
 # 
