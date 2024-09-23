@@ -14,6 +14,22 @@ def start_camera(videoInput=0):
     return cap
 
 def get_video_info(filename = 0):
+        """
+    Retrieves video information such as frame width, frame height, frames per second (fps), 
+    and the number of frames from a video file or a camera stream.
+
+    Parameters:
+    filename (str or int): The path to the video file or 0 for the default camera stream. 
+                           If 0, the function will use the default camera.
+
+    Returns:
+    dict: A dictionary containing the following keys:
+        - "frame_width" (int): The width of the video frames.
+        - "frame_height" (int): The height of the video frames.
+        - "fps" (int): The frames per second of the video.
+        - "num_frames" (int or str): The total number of frames in the video. 
+                                     If the input is a camera stream, this will be "stream".
+    """
     cap = start_camera(videoInput=filename)
 
     frame_width = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
