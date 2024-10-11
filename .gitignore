@@ -1,6 +1,9 @@
 #ignore data folders
 *data*/
 
+ignore
+*.vscode
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
