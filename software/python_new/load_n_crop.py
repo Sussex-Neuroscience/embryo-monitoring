@@ -8,7 +8,7 @@ from tqdm import tqdm
 from tqdm import trange
 import copy
 import pandas as pd
-
+import os
 
 define_threshold=True
 detect_rois=True
@@ -20,8 +20,9 @@ extract_rois=True
 #ffmpeg to convert from avi to mp4
 #ffmpeg -i input_filename.avi -c:v copy -c:a copy -y output_filename.mp4
 
+data_root = "./data/"
 #video_name = "/home/andre/Documents/onedrive/projects/open_hardware_projects/embryo_monitoring/M-Mov0007_compress.mp4"
-video_name = "/home/andre/Desktop/output_gray1.avi"
+video_name = data_root+"output_gray1.avi"
 
 #wanted_fps = 2
 
@@ -34,10 +35,10 @@ video_name = "/home/andre/Desktop/output_gray1.avi"
 #cap.release()
 
 #wanted_fps = 2
-bound_rect_file="./data/bounding_rectangles.json"
+bound_rect_file= data_root+ "bounding_rectangles.json"
 #crop_map_file = "./data/crop_map.npy"
 #crop_image_file = "./data/crop_image.npy"
-threshold_file = "./data/threshold.txt"
+threshold_file = data_root+ "threshold.txt"
 
 if define_threshold:
     #crop_map, threshold,crop_image = sf.define_threshold(filename=video_name)
