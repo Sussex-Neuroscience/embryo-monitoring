@@ -4,7 +4,8 @@ from matplotlib import transforms
 #import time
 #test = np.random.randint(low=0,high=255,size=(25,15))
 #plot = True
-all_data = np.load("./data/ROI0.npy")
+#all_data = np.load("./data/ROI0.npy")
+all_data = np.load("/home/andre/Desktop/ROI00.npy")
 #threshold_value = 30
 #thresholds= all_data>threshold_value
 #mean_brightness=np.zeros([all_data.shape[2],1])

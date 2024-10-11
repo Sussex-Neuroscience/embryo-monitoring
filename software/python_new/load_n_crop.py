@@ -1,4 +1,5 @@
 
+
 #import all needed libraries
 import numpy as np
 import cv2 as cv
@@ -8,9 +9,11 @@ from tqdm import trange
 import copy
 import pandas as pd
 
-define_threshold=False
-detect_rois=False
+
+define_threshold=True
+detect_rois=True
 extract_rois=True
+
 
 
 
@@ -18,7 +21,7 @@ extract_rois=True
 #ffmpeg -i input_filename.avi -c:v copy -c:a copy -y output_filename.mp4
 
 #video_name = "/home/andre/Documents/onedrive/projects/open_hardware_projects/embryo_monitoring/M-Mov0007_compress.mp4"
-video_name = "/home/andre/Videos/output_gray1.avi"
+video_name = "/home/andre/Desktop/output_gray1.avi"
 
 #wanted_fps = 2
 
